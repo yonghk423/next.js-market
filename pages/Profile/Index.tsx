@@ -9,7 +9,7 @@ height: 25px;
 
 const Profile: NextPage = () => {
   return (
-    <Layout  title="홈" hasTabBar>
+    <Layout  title="나의 배추" hasTabBar>
     <div className="py-10 px-4">
       <div>
         <div />
