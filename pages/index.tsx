@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import styled from "styled-components"
+import Layout from '../components/Layout'
 
 const Container = styled.div`  
   padding: 10px;
@@ -53,7 +54,8 @@ cursor: pointer;
 
 const Home: NextPage = () => {
   return (
-    <Container>
+   <Layout title="홈" hasTabBar>
+      <Container>
       {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
         <ItemListBox key={i}>          
           <ItemBox>  
@@ -120,6 +122,7 @@ const Home: NextPage = () => {
         </BtnSvg>
       </BtnBox>
     </Container>
+   </Layout>
   );
 }
 

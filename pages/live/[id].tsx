@@ -12,6 +12,7 @@ border: 1px solid black;
 const LiveImg = styled.div`
 border: 1px solid black;
 padding: 80px;
+background-color: green;
 `;
 
 const LiveItemTitle = styled.div``;
@@ -29,16 +30,15 @@ bottom: 0;
 right: 0;
 cursor: pointer; 
 `;
-const LiveBtn = styled.button``
-const Live: NextPage = () => {
+const LiveBtn = styled.div`
+`;
+const LiveDetail: NextPage = () => {
   return (
     <Container>
-      {[1, 1, 1, 1, 1, 1, 1].map((_, i) => (
-        <LiveListBox key={i}>
+        <LiveListBox>
           <LiveImg/>
           <LiveItemTitle>iphon13 pro</LiveItemTitle>
         </LiveListBox>
-      ))}
       <LiveBtn>
         <Svg
           className="w-6 h-6"
@@ -54,9 +54,10 @@ const Live: NextPage = () => {
             d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
           ></path>
         </Svg>
+        
       </LiveBtn>
     </Container>
   );
 };
 
-export default Live;
+export default LiveDetail;

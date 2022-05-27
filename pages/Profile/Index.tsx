@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import styled from "styled-components"
+import Layout from '../../components/Layout';
 
 const Svg = styled.svg`
 width: 25px;
@@ -8,6 +9,7 @@ height: 25px;
 
 const Profile: NextPage = () => {
   return (
+    <Layout  title="홈" hasTabBar>
     <div className="py-10 px-4">
       <div>
         <div />
@@ -141,6 +143,7 @@ const Profile: NextPage = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 
