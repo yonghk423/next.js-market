@@ -7,21 +7,53 @@ width: 25px;
 height: 25px;
 `;
 
+const Container = styled.div`
+border: 1px solid black;
+`;
+
+const SubContainer = styled.div`
+margin: 10px;
+border: 1px solid black;
+`;
+
+const MainTitleBox = styled.div`
+border: 1px solid black;
+`;
+
+const Qbox = styled.div`
+border: 1px solid black;
+`;
+
+const UserInfoBox = styled.div`
+border: 1px solid black;
+`;
+
+const CuriousBox = styled.div`
+border: 1px solid black;
+`;
+
+const AnswerBox = styled.div`
+border: 1px solid black;
+
+`;
+
 const Community: NextPage = () => {
   return (
     <Layout hasTabBar title="동네 사람들">
-    <div>
-      <div>
-        <span>동네질문</span>
-        <span>
-          <span>Q.</span> What is the best mandu restaurant?
-        </span>
+    <Container>
+      <SubContainer>
+        <MainTitleBox>
+          <div>질문해요</div>
+        </MainTitleBox>
+        <Qbox>
+          <div>Q.</div> What is the best mandu restaurant?
+        </Qbox>
+        <UserInfoBox>
+          <div>용희</div>
+          <div>18시간 전</div>
+        </UserInfoBox>
         <div>
-          <span>니꼬</span>
-          <span>18시간 전</span>
-        </div>
-        <div>
-          <span>
+          <CuriousBox>
             <Svg
               className="w-4 h-4"
               fill="none"
@@ -37,8 +69,8 @@ const Community: NextPage = () => {
               ></path>
             </Svg>
             <span>궁금해요 1</span>
-          </span>
-          <span>
+          </CuriousBox>
+          <AnswerBox>
             <Svg
               className="w-4 h-4"
               fill="none"
@@ -54,9 +86,9 @@ const Community: NextPage = () => {
               ></path>
             </Svg>
             <span>답변 1</span>
-          </span>
+          </AnswerBox>
         </div>
-      </div>
+      </SubContainer>
       <div>
         <Svg
           className="w-6 h-6"
@@ -73,7 +105,7 @@ const Community: NextPage = () => {
           ></path>
         </Svg>
       </div>
-    </div>
+    </Container>
     </Layout>
   );
 };

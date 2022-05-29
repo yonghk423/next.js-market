@@ -9,6 +9,10 @@ height: 25px;
 const Nav = styled.nav`
 display: flex;
 justify-content: space-around;
+position: fixed; /* 이 부분을 고정 */
+bottom: 0; /* 하단에 여백 없이 */
+width: 100%; /* 가로 사이즈를 브라우저에 가득 채움 */
+border: 1px solid black;
 `;
 
 interface LayoutProps {
