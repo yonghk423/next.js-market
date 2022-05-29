@@ -1,27 +1,48 @@
 import type { NextPage } from "next";
 import Layout from '../../components/Layout';
+import styled from "styled-components"
 
-const Chats: NextPage = () => {
+const Container = styled.div`
+border: 1px solid black
+`;
+
+const InfoBox = styled.div`
+border: 1px solid black
+`;
+
+const UserImgBox = styled.div`
+border: 1px solid black
+`;
+
+const UserImg = styled.div`
+border: 1px solid black;
+width: 25px;
+height: 25px;
+border-radius: 50px;
+`;
+
+const Dialogue: NextPage = () => {
   return (
     <Layout hasTabBar title="대화 나누기" >
-    <div className="py-10 divide-y-[1px] ">
+    <Container >
       {[1, 1, 1, 1, 1, 1, 1].map((_, i) => (
-        <div
-          key={i}
-          className="flex px-4 cursor-pointer py-3 items-center space-x-3"
+        <InfoBox
+          key={i}          
         >
-          <div className="w-12 h-12 rounded-full bg-slate-300" />
+          <UserImgBox>
+            <UserImg/>
+          </UserImgBox>
           <div>
-            <p className="text-gray-700">Steve Jebs</p>
-            <p className="text-sm  text-gray-500">
+            <p>Steve Jebs</p>
+            <p>
               See you tomorrow in the corner at 2pm!
             </p>
           </div>
-        </div>
+        </InfoBox>
       ))}
-    </div>
+    </Container>
     </Layout>
   );
 };
 
-export default Chats;
+export default Dialogue;

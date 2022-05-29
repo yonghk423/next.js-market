@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
+import styled from "styled-components"
 
-const ChatDetail: NextPage = () => {
+const DialogueDetail: NextPage = () => {
   return (
     <div>
       <div>
@@ -27,4 +28,4 @@ const ChatDetail: NextPage = () => {
   );
 };
 
-export default ChatDetail;
+export default DialogueDetail;
