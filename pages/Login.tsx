@@ -52,13 +52,14 @@ export default function Login() {
   const onPhoneClick = () => setMethod("phone");
 
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");  
+  const [phone, setPhone] = useState("");  
 
   const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     console.log(value);
-    const data = Object.assign({ "number" : value })
-    setNumber(data)     
+    const data = Object.assign({ "phone" : value })
+    console.log(data);
+    setPhone(data)     
   };
 
   
@@ -76,12 +77,18 @@ export default function Login() {
     if(email !== "") {
       fetch("/api/users/Login", {
         method : "POST",
-        body: JSON.stringify(email)
+        body: JSON.stringify(email),
+        headers: {
+          "Content-Type": "application/json"
+        } // api를 호출 할 때마다 headers를 설정해야 한다.
       })
-    } else if(number !== "") {
+    } else if(phone !== "") {
       fetch("/api/users/Login", {
         method : "POST",
-        body: JSON.stringify(number)
+        body: JSON.stringify(phone),
+        headers: {
+          "Content-Type": "application/json"
+        }
       })
     } else return;     
 }
@@ -113,7 +120,7 @@ export default function Login() {
                 <span>+82</span>
                 <input 
                   // value={number}
-                  type="number" 
+                  type="number"                   
                   onChange={onNumberChange}
                   placeholder="Phone Number"
                   required 
