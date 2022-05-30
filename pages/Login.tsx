@@ -26,7 +26,7 @@ const LoginBtn = styled.button`
   
 `;
 
-const FormBox = styled.div`
+const FormBox = styled.form`
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
@@ -50,6 +50,42 @@ export default function Login() {
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => setMethod("email");
   const onPhoneClick = () => setMethod("phone");
+
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");  
+
+  const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    console.log(value);
+    const data = Object.assign({ "number" : value })
+    setNumber(data)     
+  };
+
+  
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    console.log(value);
+    const data = Object.assign({ "email" : value })
+    console.log(data);
+    setEmail(data);
+  };
+  
+
+   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {    
+    e.preventDefault();
+    if(email !== "") {
+      fetch("/api/users/Login", {
+        method : "POST",
+        body: JSON.stringify(email)
+      })
+    } else if(number !== "") {
+      fetch("/api/users/Login", {
+        method : "POST",
+        body: JSON.stringify(number)
+      })
+    } else return;     
+}
+
   return (
     <Container>
       <MainTitle>Welcome to baechu Market</MainTitle>
@@ -58,17 +94,30 @@ export default function Login() {
             <LoginBtn onClick={onEmailClick}>Email</LoginBtn>
             <LoginBtn onClick={onPhoneClick}>Phone</LoginBtn>
         </EmailPhoneBtnBox>
-        <FormBox>
+        <FormBox onSubmit={onSubmit}>
           <label>
             {method === "email" ? "Email address" : null}
             {method === "phone" ? "Phone number" : null}
           </label>
           <div>
-            {method === "email" ? <input type="email" required /> : null}
+            {method === "email" ? 
+              <input 
+                // value={email}
+                type="email"
+                onChange={onEmailChange}
+                placeholder="Email"
+                required
+                /> : null}
             {method === "phone" ? (
               <div>
                 <span>+82</span>
-                <input type="number" required />
+                <input 
+                  // value={number}
+                  type="number" 
+                  onChange={onNumberChange}
+                  placeholder="Phone Number"
+                  required 
+                  />
               </div>
             ) : null}
           </div>
