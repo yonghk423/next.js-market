@@ -47,9 +47,17 @@ const SocialLoginBtnBox = styled.div`
 `;
 
 export default function Login() {
+  const [mailTokenInput, setMailTokenInput] = useState(false);
+  const [numberTokenInput , setNumberTokenInput] = useState(false)
   const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => setMethod("email");
-  const onPhoneClick = () => setMethod("phone");
+  const onEmailClick = () => {
+    setMethod("email");
+    setNumberTokenInput(false)
+  }
+  const onPhoneClick = () => {
+    setMethod("phone");
+    setMailTokenInput(false)
+  }
 
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");  
@@ -72,7 +80,9 @@ export default function Login() {
   };
   
 
-   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {    
+   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {   
+     //클릭하면 false -> true로 전환 되며    
+     //true 가 되면 창이 열리는 방식으로 
     e.preventDefault();
     if(email !== "") {
       fetch("/api/users/Login", {
@@ -82,6 +92,7 @@ export default function Login() {
           "Content-Type": "application/json"
         } // api를 호출 할 때마다 headers를 설정해야 한다.
       })
+      setMailTokenInput(true);
     } else if(phone !== "") {
       fetch("/api/users/Login", {
         method : "POST",
@@ -89,7 +100,8 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json"
         }
-      })
+      })      
+      setNumberTokenInput(true)
     } else return;     
 }
 
@@ -106,16 +118,21 @@ export default function Login() {
             {method === "email" ? "Email address" : null}
             {method === "phone" ? "Phone number" : null}
           </label>
-          <div>
-            {method === "email" ? 
+            <div>
+            {method === "email" ?              
               <input 
                 // value={email}
                 type="email"
                 onChange={onEmailChange}
                 placeholder="Email"
-                required
-                /> : null}
-            {method === "phone" ? (
+                required/>
+                : null}
+                {
+                  mailTokenInput ? (<input placeholder='email token..'></input>) : null
+                }
+            </div>
+            <div>    
+            {method === "phone" ? (              
               <div>
                 <span>+82</span>
                 <input 
@@ -127,6 +144,9 @@ export default function Login() {
                   />
               </div>
             ) : null}
+            {
+              numberTokenInput ? (<input placeholder='number token..'></input>) : null
+            }
           </div>
           <button>
             {method === "email" ? "Get login link" : null}
