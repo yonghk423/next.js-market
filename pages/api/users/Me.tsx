@@ -18,4 +18,4 @@ async function handler(
   });
   }
 
-export default withApiSession(Handler("GET", handler));
+export default withApiSession(Handler("GET", handler, true));
