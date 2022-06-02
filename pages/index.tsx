@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import styled from "styled-components"
 import Layout from '../components/Layout'
+import useUser from '../libs/client/useUser'
 
 const Container = styled.div`  
   padding: 10px;
@@ -53,15 +54,18 @@ cursor: pointer;
 `;
 
 const Home: NextPage = () => {
+  const user = useUser();
+  console.log(user);
   return (
    <Layout title="홈" hasTabBar>
+    <Head><title>Home</title></Head> 
       <Container>
       {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
         <ItemListBox key={i}>          
           <ItemBox>  
             <ImgBox></ImgBox>
             <InfoBox>
-              <h3>New iPhone 14</h3>
+              <h3>New iPhone 14</h3> 
               <div>Black</div>
               <div>$95</div>
             </InfoBox>            
