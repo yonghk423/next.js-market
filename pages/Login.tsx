@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useState } from "react";
 import styled from "styled-components"
 
@@ -45,7 +47,10 @@ export default function Login() {
   const [numberTokenInput , setNumberTokenInput] = useState(false)
   const [tokenData, setTokenData] = useState<string | undefined>("")
   const [tokenBtn, setTokenBtn] = useState(false);
+  const [tokenRouter, setTokenRouter] = useState(false);
   const [method, setMethod] = useState<"email" | "phone">("email");
+  const router = useRouter(); 
+
   const onEmailClick = () => {
     setMethod("email");
     setNumberTokenInput(false)
@@ -99,6 +104,7 @@ export default function Login() {
            "Content-Type": "application/json"
          } // api를 호출 할 때마다 headers를 설정해야 한다.
        })
+       setTokenRouter(true);
     }
     if(email !== "") {
       fetch("/api/users/Login", {
@@ -123,6 +129,12 @@ export default function Login() {
       setTokenBtn(true)
     } else return;     
 }
+
+useEffect(() => {
+    if(tokenRouter === true) {
+      router.push("/");
+    }
+  }, [tokenRouter, router])
 
   return (
     <Container>
