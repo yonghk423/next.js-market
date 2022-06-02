@@ -21,13 +21,16 @@ interface Data {
   email:string;
   phone:string;
 }
+interface TokenData {
+  tokenData:string;
+}
 
 async function handler(
   req: NextApiRequest, 
   res: NextApiResponse<ResponseType>
   ) {
   console.log(req.body);
-  const { phone, email }:Data = req.body;  
+  const { phone, email,  }:Data = req.body;  
   const user = phone ? { phone: +phone } : email ? { email} : null;
 
   if(!user) return res.status(400).json({ok: false});

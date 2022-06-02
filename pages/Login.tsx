@@ -9,21 +9,16 @@ const MainTitle = styled.div`
   text-align: center;
 `;
 
-const ContainerSub = styled.div`
-  
+const ContainerSub = styled.div` 
 `;
 
 const EmailPhoneBtnBox = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  justify-content: center;
-  
-  
-  
+  justify-content: center;  
 `;
 
-const LoginBtn = styled.button`
-  
+const LoginBtn = styled.button`  
 `;
 
 const FormBox = styled.form`
@@ -32,7 +27,6 @@ const FormBox = styled.form`
   justify-content: center;
 `;
 const SocialLoginBox = styled.div`
-
 `;
 const SocialLoginTitile = styled.div`
   display: grid;
@@ -49,18 +43,30 @@ const SocialLoginBtnBox = styled.div`
 export default function Login() {
   const [mailTokenInput, setMailTokenInput] = useState(false);
   const [numberTokenInput , setNumberTokenInput] = useState(false)
+  const [tokenData, setTokenData] = useState<string | undefined>("")
+  const [tokenBtn, setTokenBtn] = useState(false);
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
     setMethod("email");
     setNumberTokenInput(false)
+    setTokenBtn(false)
   }
   const onPhoneClick = () => {
     setMethod("phone");
     setMailTokenInput(false)
+    setTokenBtn(false)
   }
 
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");  
+
+  const onTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    console.log(value);
+    const data = Object.assign({ "token" : value })
+    console.log(data)
+    setTokenData(data);    
+  }
 
   const onNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -84,6 +90,16 @@ export default function Login() {
      //클릭하면 false -> true로 전환 되며    
      //true 가 되면 창이 열리는 방식으로 
     e.preventDefault();
+    console.log(tokenData);
+    if(tokenData !== "") {
+      fetch("/api/users/Confirm", {
+         method : "POST",
+         body: JSON.stringify(tokenData),
+         headers: {
+           "Content-Type": "application/json"
+         } // api를 호출 할 때마다 headers를 설정해야 한다.
+       })
+    }
     if(email !== "") {
       fetch("/api/users/Login", {
         method : "POST",
@@ -93,6 +109,8 @@ export default function Login() {
         } // api를 호출 할 때마다 headers를 설정해야 한다.
       })
       setMailTokenInput(true);
+      setTokenBtn(true)
+      setEmail("")
     } else if(phone !== "") {
       fetch("/api/users/Login", {
         method : "POST",
@@ -100,8 +118,9 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json"
         }
-      })      
+      })    
       setNumberTokenInput(true)
+      setTokenBtn(true)
     } else return;     
 }
 
@@ -119,22 +138,33 @@ export default function Login() {
             {method === "phone" ? "Phone number" : null}
           </label>
             <div>
-            {method === "email" ?              
+            {method === "email" ?
+            <div>              
               <input 
                 // value={email}
                 type="email"
                 onChange={onEmailChange}
                 placeholder="Email"
-                required/>
-                : null}
+                required
+                />
+            </div>    
+            : null}
                 {
-                  mailTokenInput ? (<input placeholder='email token..'></input>) : null
+                  mailTokenInput ?
+                  (<input 
+                    name="token"                    
+                    placeholder='email token..'
+                    type="number"
+                    required
+                    onChange={onTokenChange}
+                    />
+                    ) : null
                 }
             </div>
+            
             <div>    
-            {method === "phone" ? (              
+            {method === "phone" ?               
               <div>
-                <span>+82</span>
                 <input 
                   // value={number}
                   type="number"                   
@@ -143,15 +173,26 @@ export default function Login() {
                   required 
                   />
               </div>
-            ) : null}
-            {
-              numberTokenInput ? (<input placeholder='number token..'></input>) : null
-            }
+             : null}
+              {
+                numberTokenInput ? 
+                (<input
+                  name="token" 
+                  placeholder='number token..'
+                  type="number"
+                  required
+                  onChange={onTokenChange}
+                  />
+                  ) : null
+              }
           </div>
-          <button>
+          { tokenBtn && <button>submit</button> }   
+          { !tokenBtn &&      
+          <button>            
             {method === "email" ? "Get login link" : null}
             {method === "phone" ? "Get one-time password" : null}
-          </button>
+          </button>    
+          }                 
         </FormBox>
         <SocialLoginBox>                      
           <SocialLoginTitile>
