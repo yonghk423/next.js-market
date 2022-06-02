@@ -2,8 +2,9 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { theme } from "../styles/theme"
 import { ThemeProvider } from "styled-components";
+import { SWRConfig } from 'swr';
 import { createGlobalStyle } from "styled-components";
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle` 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -69,13 +70,14 @@ a {
 }
 `;
 
-
 function MyApp({ Component, pageProps }: AppProps) {
-  return (  
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </ThemeProvider>
+  return (   
+    <SWRConfig value={{fetcher:(url:string) => fetch(url).then((response) => response.json())}}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SWRConfig>
   )
 }
 
