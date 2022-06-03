@@ -1,4 +1,19 @@
+import { Product } from '@prisma/client';
 import type { NextPage } from "next";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import useMutation from "../../libs/client/useMutation"
+
+interface UploadDataType {
+  product: Product
+}
+
+// interface UploadProductMutation {
+//   ok: boolean;
+//   product: Product;
+// }
+
 import styled from "styled-components"
 
 const Svg = styled.svg`
@@ -10,17 +25,53 @@ const FileInput = styled.input`
   display: none;
 `;
 
-interface UploadProduct {
-  name:string;
-  price:number;
-  description:string;
-}
-
-const onDataChange = (e:any) => {
-
-}
-
 const Upload: NextPage = () => {
+  const router = useRouter()  
+  const [name, setName] = useState("")
+  const [price, setPrice] = useState("")
+  const [description, setDescription] = useState("")
+  const [uploadState , setUploadState] = useState(false);
+  
+  
+  const onNameChange = (e:React.ChangeEvent<HTMLInputElement>) => {  
+    const { value } = e.target
+    setName(value)
+}
+  const onPriceChange = (e:React.ChangeEvent<HTMLInputElement> ) => {
+    const { value } = e.target
+    setPrice(value);
+  }
+
+  const onDescriptionChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target
+    setDescription(value);
+  }
+// const [uploadProduct, { loading, data }] =
+//     useMutation("/api/products");
+  
+//   useEffect(() => {
+//     if (data?.ok) {
+//       router.push(`/products/${data.product.id}`);
+//     }
+//   }, [data, router]);
+
+
+  const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();     
+    fetch("/api/products/Index", {
+        method : "POST",
+        body: JSON.stringify({
+        "name" : name,
+        "price": price,
+        "description" : description,
+         }),
+        headers: {
+          "Content-Type": "application/json"
+         } // api를 호출 할 때마다 headers를 설정해야 한다.
+       })    
+    setUploadState(true)
+  }
+
   return (
     <div>
       <div>
@@ -44,10 +95,10 @@ const Upload: NextPage = () => {
           </label>
         </div>
       </div>
-      <form>
+      <form onSubmit={onSubmit}>
         <div>
-          <div onChange={onDataChange}>Name</div>
-          <input type="text"></input>
+          <div>Name</div>
+          <input onChange={onNameChange} type="text"/>
         </div>
         <div>
           <div>Price</div>
@@ -55,7 +106,7 @@ const Upload: NextPage = () => {
             <div>
               <div>$</div>
             </div>
-            <input type="text" placeholder="0.00" />
+            <input onChange={onPriceChange} type="number" placeholder="0.00" />
             <div>
               <div>USD</div>
             </div>
@@ -64,7 +115,7 @@ const Upload: NextPage = () => {
         <div>
           <div>Description</div>
           <div>
-            <textarea rows={4} />
+            <textarea rows={4}  onChange={onDescriptionChange}/>
           </div>
         </div>
         <button>Upload product</button>

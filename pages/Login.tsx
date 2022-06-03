@@ -63,12 +63,12 @@ export default function Login() {
   }
 
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");  
-
+  const [phone, setPhone] = useState(""); 
+  
   const onTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     console.log(value);
-    const data = Object.assign({ "token" : value })
+    const data:ObjectConstructor = Object.assign({ "token" : value })
     console.log(data)
     setTokenData(data);    
   }
@@ -85,7 +85,7 @@ export default function Login() {
   const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     console.log(value);
-    const data = Object.assign({ "email" : value })
+    const data:ObjectConstructor = Object.assign({ "email" : value })
     console.log(data);
     setEmail(data);
   };
