@@ -10,6 +10,16 @@ const FileInput = styled.input`
   display: none;
 `;
 
+interface UploadProduct {
+  name:string;
+  price:number;
+  description:string;
+}
+
+const onDataChange = (e:any) => {
+
+}
+
 const Upload: NextPage = () => {
   return (
     <div>
@@ -34,26 +44,33 @@ const Upload: NextPage = () => {
           </label>
         </div>
       </div>
-      <div>
-        <label>Price</label>
+      <form>
         <div>
+          <div onChange={onDataChange}>Name</div>
+          <input type="text"></input>
+        </div>
+        <div>
+          <div>Price</div>
           <div>
-            <span>$</span>
-          </div>
-          <input type="text" placeholder="0.00" />
-          <div>
-            <span>USD</span>
+            <div>
+              <div>$</div>
+            </div>
+            <input type="text" placeholder="0.00" />
+            <div>
+              <div>USD</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div>
-        <label>Description</label>
         <div>
-          <textarea rows={4} />
+          <div>Description</div>
+          <div>
+            <textarea rows={4} />
+          </div>
         </div>
-      </div>
-      <button>Upload product</button>
+        <button>Upload product</button>
+      </form>
     </div>
+    
   );
 };
 

@@ -21,18 +21,17 @@ interface Data {
   email:string;
   phone:string;
 }
-interface TokenData {
-  tokenData:string;
-}
 
 async function handler(
   req: NextApiRequest, 
   res: NextApiResponse<ResponseType>
   ) {
   console.log(req.body);
-  const { phone, email,  }:Data = req.body;  
-  const user = phone ? { phone: +phone } : email ? { email} : null;
-
+  console.log(req.body.phone);
+  console.log(typeof req.body.phone)
+  const { phone, email  }:Data = req.body;  
+  const user = phone ? { phone: phone } : email ? { email } : null;
+    console.log(user)
   if(!user) return res.status(400).json({ok: false});
   const payload = Math.floor(100000 + Math.random() * 900000) + "";
   const token = await client.token.create({
@@ -53,27 +52,27 @@ async function handler(
   });
 
   if (phone) {
-    const message = await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_MSID,
-      to: process.env.MY_PHONE!,
-      body: `Your login token is ${payload}.`,
-    });
-    console.log(message);
+    // const message = await twilioClient.messages.create({
+    //   messagingServiceSid: process.env.TWILIO_MSID,
+    //   to: process.env.MY_PHONE!,
+    //   body: `Your login token is ${payload}.`,
+    // });
+    // console.log(message);
   } else if (email) {
-      const sendEmail = await transporter.sendMail({
-        from: `hello <yonghk423@naver.com>`,
-        to: email,
-        subject: 'token',
-        text: `your login token is ${payload}`,
-        html: `
-          <div style="text-align: center;">
-            <h3 style="color: #FA5882">hello</h3>
-            <br />
-            <p>your login token is ${payload}</p>
-          </div>
-      `})
-      .then((result: any) => console.log(result))
-      .catch((err: any) => console.log(err))
+      // const sendEmail = await transporter.sendMail({
+      //   from: `hello <yonghk423@naver.com>`,
+      //   to: email,
+      //   subject: 'token',
+      //   text: `your login token is ${payload}`,
+      //   html: `
+      //     <div style="text-align: center;">
+      //       <h3 style="color: #FA5882">hello</h3>
+      //       <br />
+      //       <p>your login token is ${payload}</p>
+      //     </div>
+      // `})
+      // .then((result: any) => console.log(result))
+      // .catch((err: any) => console.log(err))
     }
   
   
@@ -133,4 +132,4 @@ async function handler(
   // }
 }
 
-export default Handler("POST", handler)
+export default Handler({ method: "POST", handler, isPrivate: false });
