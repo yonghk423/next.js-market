@@ -3,16 +3,6 @@ import type { NextPage } from "next";
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import useMutation from "../../libs/client/useMutation"
-
-interface UploadDataType {
-  product: Product
-}
-
-// interface UploadProductMutation {
-//   ok: boolean;
-//   product: Product;
-// }
 
 import styled from "styled-components"
 
@@ -25,13 +15,20 @@ const FileInput = styled.input`
   display: none;
 `;
 
+interface InfoData {
+  name  : string;
+  price : string;
+  description : string
+}
+
 const Upload: NextPage = () => {
   const router = useRouter()  
+  const id = router.query.id;
+  console.log(id);
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
   const [description, setDescription] = useState("")
-  const [uploadState , setUploadState] = useState(false);
-  
+  const [uploadState , setUploadState] = useState(false); 
   
   const onNameChange = (e:React.ChangeEvent<HTMLInputElement>) => {  
     const { value } = e.target
@@ -46,14 +43,13 @@ const Upload: NextPage = () => {
     const { value } = e.target
     setDescription(value);
   }
-// const [uploadProduct, { loading, data }] =
-//     useMutation("/api/products");
-  
-//   useEffect(() => {
-//     if (data?.ok) {
-//       router.push(`/products/${data.product.id}`);
-//     }
-//   }, [data, router]);
+
+  useEffect(() => {
+    if(uploadState === true) {
+      router.push(`/products/${id}`);
+    }
+
+  }, [uploadState, router]);
 
 
   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {

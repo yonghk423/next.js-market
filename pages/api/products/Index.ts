@@ -9,7 +9,15 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
     console.log(req.session.user);
-    const {
+    if(req.method === "GET") {
+      const products = await client.product.findMany({});
+      res.json({
+        ok:true,
+        products,
+      })
+    }
+    if(req.method === "POST") {
+      const {
         body: { name, price, description },
         session: { user },
     } = req;
@@ -31,11 +39,12 @@ async function handler(
         ok:true,
         product,
     })  
+    }
   }
 
 export default withApiSession(
   Handler({
-    method: "POST",
+    methods: ["GET" , "POST"],
     handler,
   })
 );

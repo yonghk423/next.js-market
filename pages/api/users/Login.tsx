@@ -25,10 +25,7 @@ interface Data {
 async function handler(
   req: NextApiRequest, 
   res: NextApiResponse<ResponseType>
-  ) {
-  console.log(req.body);
-  console.log(req.body.phone);
-  console.log(typeof req.body.phone)
+  ) {  
   const { phone, email  }:Data = req.body;  
   const user = phone ? { phone: phone } : email ? { email } : null;
     console.log(user)
@@ -132,4 +129,4 @@ async function handler(
   // }
 }
 
-export default Handler({ method: "POST", handler, isPrivate: false });
+export default Handler({ methods: ["POST"], handler, isPrivate: false });

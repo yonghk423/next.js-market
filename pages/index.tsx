@@ -5,6 +5,9 @@ import styles from '../styles/Home.module.css'
 import styled from "styled-components"
 import Layout from '../components/Layout'
 import useUser from '../libs/client/useUser'
+import { useRouter } from "next/router";
+import useSWR from 'swr'
+import { Product } from '@prisma/client'
 
 const Container = styled.div`  
   padding: 10px;
@@ -51,23 +54,42 @@ position: fixed;
 bottom: 0;
 right: 0;
 cursor: pointer;
+z-index: 1;
 `;
 
+interface ProductsResponse {
+  ok:boolean;
+  products: Product[]
+}
+
 const Home: NextPage = () => {
-  const {user, isLoading} = useUser();
+  const {user, isLoading} = useUser(); 
+  const { data } = useSWR<ProductsResponse>("/api/products/Index")
+  console.log(data); 
   console.log(user);
+  const router = useRouter();
+  const onClick = (id:number) => {
+    router.push(
+      {
+        pathname: '/products/Upload',
+        query: {
+          id
+        },
+      },
+      
+    );
+  };
   return (
    <Layout title="홈" hasTabBar>
     <Head><title>Home</title></Head> 
       <Container>
-      {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
-        <ItemListBox key={i}>          
+      {data?.products?.map((product) => (
+        <ItemListBox key={product.id}>          
           <ItemBox>  
             <ImgBox></ImgBox>
             <InfoBox>
-              <h3>New iPhone 14</h3> 
-              <div>Black</div>
-              <div>$95</div>
+              <h3>{product.name}</h3> 
+              <div>{product.price}</div>        
             </InfoBox>            
           </ItemBox>
           <StateImgBox>
@@ -110,6 +132,7 @@ const Home: NextPage = () => {
       ))}
       <BtnBox>
         <BtnSvg
+          onClick={()=> onClick(user.id)}
           className="h-6 w-6"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
