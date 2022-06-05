@@ -26,6 +26,7 @@ const ImgBox = styled.div`
   border: 1px solid black;
   border-radius: 10px;
   background-color: gray;
+  cursor: pointer;
 `
 const ItemBox = styled.div`
   display: grid;
@@ -68,28 +69,39 @@ const Home: NextPage = () => {
   console.log(data); 
   console.log(user);
   const router = useRouter();
-  const onClick = (id:number) => {
+  const onBtnClick = (id:number) => {
     router.push(
       {
         pathname: '/products/Upload',
         query: {
           id
         },
+      },      
+    );
+  };
+
+  const onProductClick = (id:number) => {
+    router.push(
+      {
+        pathname: `/products/${id}`,
+        query: {
+          id
+        },
       },
       
     );
-  };
+  }
   return (
    <Layout title="홈" hasTabBar>
     <Head><title>Home</title></Head> 
       <Container>
       {data?.products?.map((product) => (
         <ItemListBox key={product.id}>          
-          <ItemBox>  
+          <ItemBox onClick={() => onProductClick(product.id)}>  
             <ImgBox></ImgBox>
             <InfoBox>
               <h3>{product.name}</h3> 
-              <div>{product.price}</div>        
+              <div>₩{product.price}</div>        
             </InfoBox>            
           </ItemBox>
           <StateImgBox>
@@ -132,7 +144,7 @@ const Home: NextPage = () => {
       ))}
       <BtnBox>
         <BtnSvg
-          onClick={()=> onClick(user.id)}
+          onClick={()=> onBtnClick(user.id)}
           className="h-6 w-6"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

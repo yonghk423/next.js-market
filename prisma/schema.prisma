@@ -22,7 +22,7 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   tokens    Token[]
-  Products  Product[]
+  products  Product[]
 }
 
 model Token {

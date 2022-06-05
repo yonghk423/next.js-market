@@ -56,20 +56,20 @@ async function handler(
     // });
     // console.log(message);
   } else if (email) {
-      // const sendEmail = await transporter.sendMail({
-      //   from: `hello <yonghk423@naver.com>`,
-      //   to: email,
-      //   subject: 'token',
-      //   text: `your login token is ${payload}`,
-      //   html: `
-      //     <div style="text-align: center;">
-      //       <h3 style="color: #FA5882">hello</h3>
-      //       <br />
-      //       <p>your login token is ${payload}</p>
-      //     </div>
-      // `})
-      // .then((result: any) => console.log(result))
-      // .catch((err: any) => console.log(err))
+      const sendEmail = await transporter.sendMail({
+        from: `hello <yonghk423@naver.com>`,
+        to: email,
+        subject: 'token',
+        text: `your login token is ${payload}`,
+        html: `
+          <div style="text-align: center;">
+            <h3 style="color: #FA5882">hello</h3>
+            <br />
+            <p>your login token is ${payload}</p>
+          </div>
+      `})
+      .then((result: any) => console.log(result))
+      .catch((err: any) => console.log(err))
     }
   
   
