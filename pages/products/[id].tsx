@@ -68,7 +68,7 @@ interface ItemDetailResponse {
 
 const ItemDetail: NextPage = () => {
   const router = useRouter()
-  const { data } = useSWR<ItemDetailResponse>(
+  const { data, mutate } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
   console.log(data);
@@ -81,6 +81,8 @@ const ItemDetail: NextPage = () => {
           "Content-Type": "application/json"
          } // api를 호출 할 때마다 headers를 설정해야 한다.
        })
+    if(!data) return
+    mutate({...data, isLiked: !data.isLiked }, false )
   }
   return (
     <Container>
