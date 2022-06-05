@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import useSWR from 'swr'
 
 import styled from "styled-components"
 
@@ -22,9 +23,10 @@ interface InfoData {
 }
 
 const Upload: NextPage = () => {
+  const [state, setState]:any = useState()
+  console.log(state?.product?.id);
   const router = useRouter()  
-  const id = router.query.id;
-  console.log(id);
+  const id = router.query.id;  
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
   const [description, setDescription] = useState("")
@@ -46,10 +48,10 @@ const Upload: NextPage = () => {
 
   useEffect(() => {
     if(uploadState === true) {
-      router.push(`/products/${id}`);
+      router.push(`/products/${state?.product?.id}`);
     }
 
-  }, [uploadState, router]);
+  }, [state, router]);
 
 
   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +66,11 @@ const Upload: NextPage = () => {
         headers: {
           "Content-Type": "application/json"
          } // api를 호출 할 때마다 headers를 설정해야 한다.
-       })    
+       })
+       .then((response) => response.json().catch(() => {})) //!!!!!!!!!
+       .then((data:any) => setState(data))
+       
+          
     setUploadState(true)
   }
 

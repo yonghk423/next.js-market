@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Link from 'next/link';
+import { Product, User } from '@prisma/client';
 
 const Container = styled.div`
 padding: 50px;
@@ -53,11 +54,20 @@ width: 25px;
 height: 25px;
 `;
 
+//---!!!
+interface ProductWithUser extends Product {
+  user:User;
+}
+
+interface ItemDetailResponse {
+  ok:boolean;
+  product: ProductWithUser;
+}
+
 const ItemDetail: NextPage = () => {
   const router = useRouter()
   console.log(router.query)
-  const { data } = useSWR(router.query.id ? `/api/products/${router.query.id}` : null);
-  //router.query.id ? `/api/products/${router.query.id}` : null
+  const { data } = useSWR<ItemDetailResponse>(router.query.id ? `/api/products/${router.query.id}` : null);
   console.log(data);
   return (
     <Container>
