@@ -63,13 +63,25 @@ interface ItemDetailResponse {
   ok:boolean;
   product: ProductWithUser;
   relatedProducts: Product[];
+  isLiked: boolean;
 }
 
 const ItemDetail: NextPage = () => {
   const router = useRouter()
-  console.log(router.query)
-  const { data } = useSWR<ItemDetailResponse>(router.query.id ? `/api/products/${router.query.id}` : null);
+  const { data } = useSWR<ItemDetailResponse>(
+    router.query.id ? `/api/products/${router.query.id}` : null
+  );
   console.log(data);
+
+  const onFavClick = () => {
+    fetch(`/api/products/${router.query.id}/fav`, {
+        method : "POST",
+        body: JSON.stringify({}),
+        headers: {
+          "Content-Type": "application/json"
+         } // api를 호출 할 때마다 headers를 설정해야 한다.
+       })
+  }
   return (
     <Container>
       <MainBox>
@@ -91,8 +103,11 @@ const ItemDetail: NextPage = () => {
           <p>{data?.product?.description}</p>
           <div>
             <button>Talk to seller</button>
-            <div>
-              <Svg
+            <button 
+            onClick={onFavClick} 
+            style={ data?.isLiked ? { color:'red'} : {color : 'white'} }
+            >
+              <Svg                            
                 className="w-4 h-4"
                 fill="none"
                 stroke="currentColor"
@@ -106,7 +121,7 @@ const ItemDetail: NextPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-            </div>
+            </button>
           </div>
         </MainInfoDetailBox>      
       <AddInfoBox>

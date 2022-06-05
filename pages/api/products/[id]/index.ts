@@ -1,15 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import client from '../../../libs/server/client';
-import Handler, { ResponseType } from "../../../libs/server/Handler"
-import { withApiSession } from '../../../libs/server/WithSession';
+import client from "../../../../libs/server/client"
+import Handler, { ResponseType } from "../../../../libs/server/Handler"
+import { withApiSession } from '../../../../libs/server/WithSession';
 
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
+    const {query: { id }, session: { user }} = req
     const product = await client.product.findUnique({
         where: {
-            id: +req.query.id
+             id: +id
         },
         include: {
             user: {
@@ -36,7 +37,15 @@ async function handler(
       }
     }
   })
-    res.json({ok:true, product, relatedProducts})
+  const isLiked = Boolean(
+    await client.fav.findFirst({
+    where: {
+      productId:product?.id,
+      userId: user?.id,
+    }
+  })
+  )
+  res.json({ok:true, product, isLiked, relatedProducts})
 }
 
 export default withApiSession(
