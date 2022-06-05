@@ -26,7 +26,7 @@ async function handler(
       contains: word,
     },
   }));
-  const relatedProducrts = await client.product.findMany({
+  const relatedProducts = await client.product.findMany({
     where: {
       OR: terms,
       AND: {
@@ -36,8 +36,7 @@ async function handler(
       }
     }
   })
-    console.log(relatedProducrts)    
-    res.json({ok:true, product})
+    res.json({ok:true, product, relatedProducts})
 }
 
 export default withApiSession(

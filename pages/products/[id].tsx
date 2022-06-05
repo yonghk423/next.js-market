@@ -62,6 +62,7 @@ interface ProductWithUser extends Product {
 interface ItemDetailResponse {
   ok:boolean;
   product: ProductWithUser;
+  relatedProducts: Product[];
 }
 
 const ItemDetail: NextPage = () => {
@@ -111,11 +112,11 @@ const ItemDetail: NextPage = () => {
       <AddInfoBox>
         <h2>Similar items</h2>
         <div>
-          {[1, 2, 3, 4, 5, 6].map((_, i) => (
-            <AddInfoDetailBox key={i}>
+          {data?.relatedProducts.map((product) => (
+            <AddInfoDetailBox key={product.id}>
               <AddInfoDetailImg/>
-              <h3>Galaxy S60</h3>
-              <p>$6</p>
+              <h3>{product.name}</h3>
+              <p>{product.price}</p>
             </AddInfoDetailBox>
           ))}
         </div>
