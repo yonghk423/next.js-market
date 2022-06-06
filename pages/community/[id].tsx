@@ -2,6 +2,7 @@ import { User, Post, Answer } from '@prisma/client';
 import type { NextPage } from "next";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import styled from "styled-components"
 import useSWR from 'swr';
 
@@ -75,15 +76,49 @@ interface PostWithUser extends Post {
 interface CommunityPostResponse {
   ok: boolean;
   post: PostWithUser;
+  isWondering: boolean;
 }
 
 
 const CommunityPostDetail: NextPage = () => {
+  const [postData, setPostData] = useState()
+  // const id = postData?.post.id
   const router = useRouter();
   console.log(router.query.id)
-  const {data, error} = useSWR<CommunityPostResponse>(
+  const {data, mutate } = useSWR<CommunityPostResponse>(
     router.query.id ? `/api/posts/${router.query.id}` : null)
   console.log(data);
+
+  const onClick = () => {
+    if (!data) return;
+    mutate(
+      {
+        ...data,
+        post: {
+          ...data.post,
+          _count: {
+            ...data.post._count,
+            wondering: data.isWondering
+              ? data?.post._count.wondering - 1
+              : data?.post._count.wondering + 1,
+          },
+        },
+        isWondering: !data.isWondering,
+      },
+      false
+    );
+    fetch(`/api/posts/${router.query.id}/wonder`, {
+        method : "POST",
+        body: JSON.stringify({
+        "id" : router.query.id
+         }),
+        headers: {
+          "Content-Type": "application/json"
+         } // api를 호출 할 때마다 headers를 설정해야 한다.
+       })
+       .then((response) => response.json().catch(() => {})) //!!!!!!!!!
+       .then((data) => setPostData(data)) 
+  }
   return (
     <Container>
       <MainTitle className="inline-flex my-3 ml-4 items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
@@ -95,7 +130,7 @@ const CommunityPostDetail: NextPage = () => {
         </UserImgBox>
         <UserInfo>
           {/* <Link href={`/users/profiles/${data?.post?.user?.id}`}>   */}
-            <p>{data?.post.user.name}</p>
+            <p>{data?.post?.user?.name}</p>
             <p>View profile &rarr;</p>
           {/* </Link>           */}
         </UserInfo>
@@ -107,7 +142,7 @@ const CommunityPostDetail: NextPage = () => {
         </QuestionsBox>
         <QAstateBox>
           <div>
-            <Svg
+            <Svg style={ data?.isWondering ? { color:'green'} : {color : "black"} }
               className="w-4 h-4"
               fill="none"
               stroke="currentColor"
@@ -121,7 +156,7 @@ const CommunityPostDetail: NextPage = () => {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </Svg>
-            <div>궁금해요 {data?.post._count.wondering}</div>
+            <button onClick={onClick}>궁금해요 {data?.post._count.wondering}</button>
           </div>
           <div>
             <Svg
@@ -138,18 +173,18 @@ const CommunityPostDetail: NextPage = () => {
                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
               ></path>
             </Svg>
-            <div>{data?.post._count.answers}</div>
+            <div>{data?.post?._count?.answers}</div>
           </div>
         </QAstateBox>
       </div>
       <AnswerBox>
-        {data?.post.answers.map(answer => (
+        {data?.post?.answers?.map(answer => (
           <div key={answer.id}>
           <div/>
           <div>
             <div>{answer.user.name}</div>
             {/* <div>{answer.createdAt}</div> */}
-            <p>{answer.answer}</p>
+            <p>{answer?.answer}</p>
           </div>
         </div>
         ))}

@@ -14,9 +14,8 @@ const QWrite: NextPage = () => {
   const [data, setData] = useState("")
   const [uploadState , setUploadState] = useState(false); 
   const router = useRouter();
-  console.log(data);
-  
-  
+  console.log(data);  
+   
   const onChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     console.timeLog(value);
