@@ -58,9 +58,15 @@ cursor: pointer;
 z-index: 1;
 `;
 
+interface ProductWithCount extends Product {
+  _count: {
+    favs: number;
+  }
+}
+
 interface ProductsResponse {
   ok:boolean;
-  products: Product[]
+  products: ProductWithCount[]
 }
 
 const Home: NextPage = () => {
@@ -120,7 +126,7 @@ const Home: NextPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-              <div>2</div>
+              <div>{product._count.favs}</div>
             </div>
             <div>
               <Svg

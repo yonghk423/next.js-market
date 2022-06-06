@@ -22,7 +22,7 @@ interface Ipost {
 }
 
 const Upload: NextPage = () => {
-  const [postData, setPostData] = useState<Ipost|Ipost>()
+  const [postData, setPostData] = useState<Ipost>()
   const id = postData?.product.id
   const router = useRouter()    
   const [name, setName] = useState("")
