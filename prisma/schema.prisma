@@ -14,19 +14,19 @@ datasource db {
 }
 
 model User {
-  id         Int         @id @default(autoincrement())
-  phone      String?     @unique
-  email      String?     @unique
-  name       String
-  avatar     String?
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  tokens     Token[]
-  products   Product[]
-  fav        Fav[]
-  posts      Post[]
-  answers    Answer[]
-  wonderings Wondering[]
+  id        Int         @id @default(autoincrement())
+  phone     String?     @unique
+  email     String?     @unique
+  name      String
+  avatar    String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  tokens    Token[]
+  products  Product[]
+  fav       Fav[]
+  Posts     Post[]
+  answers   Answer[]
+  wondering Wondering[]
 }
 
 model Token {
@@ -91,4 +91,5 @@ model Wondering {
   userId    Int
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
+
 }

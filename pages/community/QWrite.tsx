@@ -15,10 +15,13 @@ const QWrite: NextPage = () => {
   const [uploadState , setUploadState] = useState(false); 
   const router = useRouter();
   console.log(data);
+  
+  
   const onChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     console.timeLog(value);
     setData(value);
+    // 유효성 검사 해야 함
 
   }
 

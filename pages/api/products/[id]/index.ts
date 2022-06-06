@@ -9,19 +9,19 @@ async function handler(
 ) {
     const {query: { id }, session: { user }} = req
     const product = await client.product.findUnique({
-        where: {
-             id: +id
+    where: {
+      id: +id.toString(),
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true,
         },
-        include: {
-            user: {
-                select: {
-                    id: true,
-                    name: true,
-                    avater: true,
-                }
-            }
-        }
-    });
+      },
+    },
+  });
     const terms = product?.name.split(" ").map((word) => ({
     name: {
       contains: word,
