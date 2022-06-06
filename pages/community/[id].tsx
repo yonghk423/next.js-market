@@ -2,6 +2,7 @@ import { User, Post, Answer } from '@prisma/client';
 import type { NextPage } from "next";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import styled from "styled-components"
 import useSWR from 'swr';
@@ -56,7 +57,7 @@ width: 25px;
 height: 25px;
 `;
 
-const ReplyBox = styled.div`
+const ReplyBox = styled.form`
   border: 1px solid black;
 `
 
@@ -81,14 +82,42 @@ interface CommunityPostResponse {
 
 
 const CommunityPostDetail: NextPage = () => {
-  const [postData, setPostData] = useState()
-  // const id = postData?.post.id
+  const [postData, setPostData] = useState("")
+  console.log(postData);
+  const [uploadState , setUploadState] = useState(false); 
+
   const router = useRouter();
   console.log(router.query.id)
   const {data, mutate } = useSWR<CommunityPostResponse>(
     router.query.id ? `/api/posts/${router.query.id}` : null)
-  console.log(data);
+  console.log(data);  
 
+  const onChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setPostData(value);
+  }
+
+  useEffect(() => {
+    if(uploadState === true) {
+      setPostData("")
+      setUploadState(false);
+    }
+  }, [uploadState])
+
+  const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    fetch(`/api/posts/${router.query.id}/answers`, {
+        method : "POST",
+        body: JSON.stringify({
+          "answer" : postData
+        }),
+        headers: {
+          "Content-Type": "application/json"
+         } // api를 호출 할 때마다 headers를 설정해야 한다.
+       })
+      //  setPostData("") // 초기화 안됨 해결 해야 함
+       setUploadState(true)
+  }
   const onClick = () => {
     if (!data) return;
     mutate(
@@ -116,8 +145,8 @@ const CommunityPostDetail: NextPage = () => {
           "Content-Type": "application/json"
          } // api를 호출 할 때마다 headers를 설정해야 한다.
        })
-       .then((response) => response.json().catch(() => {})) //!!!!!!!!!
-       .then((data) => setPostData(data)) 
+      //  .then((response) => response.json().catch(() => {})) //!!!!!!!!!
+      //  .then((data) => setPostData(data)) 
   }
   return (
     <Container>
@@ -156,7 +185,7 @@ const CommunityPostDetail: NextPage = () => {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </Svg>
-            <button onClick={onClick}>궁금해요 {data?.post._count.wondering}</button>
+            <button onClick={onClick}>궁금해요 {data?.post?._count?.wondering}</button>
           </div>
           <div>
             <Svg
@@ -190,8 +219,8 @@ const CommunityPostDetail: NextPage = () => {
         ))}
         
       </AnswerBox>
-      <ReplyBox>
-        <textarea
+      <ReplyBox onSubmit={onSubmit}>
+        <textarea onChange={onChange}
           className="mt-1 shadow-sm w-full focus:ring-orange-500 rounded-md border-gray-300 focus:border-orange-500 "
           rows={4}
           placeholder="Answer this question!"

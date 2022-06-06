@@ -1,0 +1,45 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import client from '../../../../libs/server/client';
+import Handler, { ResponseType } from "../../../../libs/server/Handler"
+import { withIronSessionApiRoute } from "iron-session/next";
+import { withApiSession } from '../../../../libs/server/WithSession';
+
+async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseType>
+) {  
+  console.log(req.body); /////기본이다
+  const {
+    query: { id },
+    session: { user },
+    body: { answer },
+  } = req;
+
+  const newAnswer = await client.answer.create({
+    data: {
+      user: {
+        connect: {
+          id: user?.id,
+        },
+      },
+      post: {
+        connect: {
+          id: +id.toString(),
+        },
+      },
+      answer,
+    },
+  });
+  console.log(newAnswer);
+  res.json({
+    ok: true,
+    answer: newAnswer,
+  });
+}
+
+export default withApiSession(
+  Handler({
+    methods: ["POST"],
+    handler,
+  })
+);
