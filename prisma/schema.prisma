@@ -14,23 +14,23 @@ datasource db {
 }
 
 model User {
-  id              Int         @id @default(autoincrement())
-  phone           String?     @unique
-  email           String?     @unique
-  name            String
-  avatar          String?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  tokens          Token[]
-  products        Product[]
-  fav             Fav[]
-  Posts           Post[]
-  answers         Answer[]
-  wondering       Wondering[]
-  writtenReviews  Review[]    @relation(name: "writtenReviews")
-  receivedReviews Review[]    @relation(name: "receivedReviews")
-  sales           Sale[]
-  purchases       Purchase[]
+  id        Int         @id @default(autoincrement())
+  phone     String?     @unique
+  email     String?     @unique
+  name      String
+  avatar    String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  tokens    Token[]
+  products  Product[]
+  fav       Fav[]
+  Posts     Post[]
+  answers   Answer[]
+  wondering Wondering[]
+  // writtenReviews  Review[]    @relation(name: "writtenReviews")
+  // receivedReviews Review[]    @relation(name: "receivedReviews")
+  sales     Sale[]
+  purchases Purchase[]
 }
 
 model Token {
@@ -100,16 +100,17 @@ model Wondering {
 
 }
 
-model Review {
-  id           Int      @id @default(autoincrement())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  review       String   @db.MediumText
-  createdBy    User     @relation(name: "writtenReviews", fields: [createdById], references: [id], onDelete: Cascade)
-  createdById  Int
-  createdFor   User     @relation(name: "receivedReviews", fields: [createdForId], references: [id], onDelete: Cascade)
-  createdForId Int
-}
+// model Review {
+//   id           Int      @id @default(autoincrement())
+//   createdAt    DateTime @default(now())
+//   updatedAt    DateTime @updatedAt
+//   review       String   @db.MediumText
+//   createdBy    User     @relation(name: "writtenReviews", fields: [createdById], references: [id], onDelete: Cascade)
+//   createdById  Int
+//   createdFor   User     @relation(name: "receivedReviews", fields: [createdForId], references: [id], onDelete: Cascade)
+//   createdForId Int
+//   score        Int      @default(1)
+// }
 
 model Sale {
   id        Int      @id @default(autoincrement())

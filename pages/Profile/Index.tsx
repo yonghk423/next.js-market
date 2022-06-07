@@ -1,21 +1,36 @@
 import type { NextPage } from "next";
 import styled from "styled-components"
 import Layout from '../../components/Layout';
+import useUser from '../../libs/client/useUser';
+import useSWR from 'swr'
+import { User } from "@prisma/client";
+import Link from 'next/link';
 
 const Svg = styled.svg`
 width: 25px;
 height: 25px;
 `;
 
+
 const Profile: NextPage = () => {
+  // const {user, isLoading} = useUser(); // 전역 설정한 데이터가 요청 경로 에러가 나오고 있지만 아직 이유가 파악이 안됨
+  // console.log(user);
+  // const { data:reviews } = useSWR<ReviewsResponse>("/api/reviews");
+  // console.log(reviews);
+  const fetcher = (url: string) => fetch(url).then((response) => response.json());
+  const { data } = useSWR("/api/users/Me", fetcher); // 전역 설정이 안됨 이유 완성후 리팩토링 필요하다
+  console.log(data)
+  
   return (
     <Layout  title="나의 배추" hasTabBar>
     <div className="py-10 px-4">
       <div>
         <div />
         <div>
-          <span>Steve Jebs</span>
-          <span>Edit profile &rarr;</span>
+          <span>{data?.profile?.name}</span>
+          <Link href="/profile/edit">
+            <a><span>Edit profile &rarr;</span></a>
+          </Link>
         </div>
       </div>
       <div>
@@ -81,9 +96,8 @@ const Profile: NextPage = () => {
         <div>
           <div />
           <div>
-            <h4>니꼬</h4>
             <div>
-              <Svg
+              {/* <Svg
                 className="text-yellow-400 h-5 w-5"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -127,20 +141,10 @@ const Profile: NextPage = () => {
                 aria-hidden="true"
               >
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </Svg>
+              </Svg> */}
             </div>
           </div>
-        </div>
-        <div>
-          <p>
-            Normally, both your asses would be dead as fucking fried chicken,
-            but you happen to pull this shit while I&apos;m in a transitional
-            period so I don&apos;t wanna kill you, I wanna help you. But I
-            can&apos;t give you this case, it don&apos;t belong to me. Besides,
-            I&apos;ve already been through too much shit this morning over this
-            case to hand it over to your dumb ass.
-          </p>
-        </div>
+        </div>         
       </div>
     </div>
     </Layout>

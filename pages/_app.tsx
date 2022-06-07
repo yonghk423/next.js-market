@@ -72,7 +72,8 @@ a {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (   
-    <SWRConfig value={{fetcher:(url:string) => fetch(url).then((response) => response.json())}}>
+    <SWRConfig 
+      value={{ fetcher:(url:string) => fetch(url).then((response) => response.json())}}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Component {...pageProps} />

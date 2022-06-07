@@ -42,7 +42,7 @@ const SocialLoginBtnBox = styled.div`
   justify-content: center;
 `;
 
-export default function Login() {
+export default function Login() { 
   const [mailTokenInput, setMailTokenInput] = useState(false);
   const [numberTokenInput , setNumberTokenInput] = useState(false)
   const [tokenData, setTokenData] = useState<string | undefined>("")

@@ -93,9 +93,9 @@ const ItemDetail: NextPage = () => {
           </ProfileImg>          
           <div>
             <p>{data?.product?.user?.name}</p>
-            <Link href={`/users/profiles/${data?.product?.user?.id}`}>
+            {/* <Link href={`/users/profiles/${data?.product?.user?.id}`}> */}
               <a>View profile &rarr;</a>
-            </Link>
+            {/* </Link> */}
           </div>
         </MainInfoBox>
       </MainBox>  

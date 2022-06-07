@@ -83,11 +83,9 @@ interface CommunityPostResponse {
 
 const CommunityPostDetail: NextPage = () => {
   const [postData, setPostData] = useState("")
-  console.log(postData);
-  const [uploadState , setUploadState] = useState(4); 
   const router = useRouter();
   console.log(router.query.id)
-  const {data, mutate } = useSWR<CommunityPostResponse>(
+  const {data, error } = useSWR<CommunityPostResponse>(
     router.query.id ? `/api/posts/${router.query.id}` : null
     ,{ refreshInterval: 1000 }
     )
@@ -111,24 +109,7 @@ const CommunityPostDetail: NextPage = () => {
        })
       //  setPostData("") // 초기화 안됨 해결 해야 함
   }
-  const onClick = () => {
-    if (!data) return;
-    mutate(
-      {
-        ...data,
-        post: {
-          ...data.post,
-          _count: {
-            ...data.post._count,
-            wondering: data.isWondering
-              ? data?.post._count.wondering - 1
-              : data?.post._count.wondering + 1,
-          },
-        },
-        isWondering: !data.isWondering,
-      },
-      false
-    );
+  const onClick = () => {    
     fetch(`/api/posts/${router.query.id}/wonder`, {
         method : "POST",
         body: JSON.stringify({
@@ -137,9 +118,7 @@ const CommunityPostDetail: NextPage = () => {
         headers: {
           "Content-Type": "application/json"
          } // api를 호출 할 때마다 headers를 설정해야 한다.
-       })
-      //  .then((response) => response.json().catch(() => {})) //!!!!!!!!!
-      //  .then((data) => setPostData(data)) 
+       })    
   }
   
   return (
@@ -152,9 +131,11 @@ const CommunityPostDetail: NextPage = () => {
           <UserImg/>
         </UserImgBox>
         <UserInfo>
-          {/* <Link href={`/users/profiles/${data?.post?.user?.id}`}>   */}
-            <p>{data?.post?.user?.name}</p>
-            <p>View profile &rarr;</p>
+          <p>{data?.post?.user?.name}</p>
+          {/* <Link href={`/users/profiles/${data?.post?.user?.id}`}>   */}            
+            {/* <a> */}
+              <p>View profile &rarr;</p>
+            {/* </a> */}
           {/* </Link>           */}
         </UserInfo>
       </UserInfoBox>

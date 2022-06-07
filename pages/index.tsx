@@ -70,10 +70,10 @@ interface ProductsResponse {
 }
 
 const Home: NextPage = () => {
-  const {user, isLoading} = useUser(); 
   const { data } = useSWR<ProductsResponse>("/api/products/Index")
   console.log(data); 
-  console.log(user);
+  const fetcher = (url: string) => fetch(url).then((response) => response.json());
+  const { data:profile } = useSWR("/api/users/Me", fetcher); 
   const router = useRouter();
   const onBtnClick = (id:number) => {
     router.push(
@@ -150,8 +150,7 @@ const Home: NextPage = () => {
       ))}
       <BtnBox>
         <BtnSvg
-          onClick={()=> onBtnClick(user.id)}
-          className="h-6 w-6"
+          onClick={()=> onBtnClick(profile?.profile?.id)}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
