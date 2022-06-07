@@ -84,26 +84,20 @@ interface CommunityPostResponse {
 const CommunityPostDetail: NextPage = () => {
   const [postData, setPostData] = useState("")
   console.log(postData);
-  const [uploadState , setUploadState] = useState(false); 
-
+  const [uploadState , setUploadState] = useState(4); 
   const router = useRouter();
   console.log(router.query.id)
   const {data, mutate } = useSWR<CommunityPostResponse>(
-    router.query.id ? `/api/posts/${router.query.id}` : null)
+    router.query.id ? `/api/posts/${router.query.id}` : null
+    ,{ refreshInterval: 1000 }
+    )
   console.log(data);  
 
   const onChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setPostData(value);
   }
-
-  useEffect(() => {
-    if(uploadState === true) {
-      setPostData("")
-      setUploadState(false);
-    }
-  }, [uploadState])
-
+  
   const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetch(`/api/posts/${router.query.id}/answers`, {
@@ -116,7 +110,6 @@ const CommunityPostDetail: NextPage = () => {
          } // api를 호출 할 때마다 headers를 설정해야 한다.
        })
       //  setPostData("") // 초기화 안됨 해결 해야 함
-       setUploadState(true)
   }
   const onClick = () => {
     if (!data) return;
@@ -148,6 +141,7 @@ const CommunityPostDetail: NextPage = () => {
       //  .then((response) => response.json().catch(() => {})) //!!!!!!!!!
       //  .then((data) => setPostData(data)) 
   }
+  
   return (
     <Container>
       <MainTitle className="inline-flex my-3 ml-4 items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
@@ -171,7 +165,8 @@ const CommunityPostDetail: NextPage = () => {
         </QuestionsBox>
         <QAstateBox>
           <div>
-            <Svg style={ data?.isWondering ? { color:'green'} : {color : "black"} }
+            <Svg 
+              // style={ data?.isWondering ? { color:'green'} : {color : "black"} }
               className="w-4 h-4"
               fill="none"
               stroke="currentColor"
