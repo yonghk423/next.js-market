@@ -13,8 +13,13 @@ interface ProfileResponse {
 const fetcher = (url: string) => fetch(url).then((response) => response.json());
 
 export default function useUser() {
-   const {data, error} = useSWR<ProfileResponse>("/api/users/Me", fetcher);
-   const router = useRouter();
+  const {data, error} = useSWR<ProfileResponse>("/api/users/Me", fetcher);
+  const router = useRouter();
+  useEffect(() => {
+    if (data && !data.ok) {
+      router.replace("/Login");
+    }
+  }, [data, router]);
    return data;
 }
 

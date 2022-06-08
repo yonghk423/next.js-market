@@ -71,6 +71,7 @@ interface ProductsResponse {
 
 const Home: NextPage = () => {
   const user = useUser()
+  console.log(user);
   const { data } = useSWR<ProductsResponse>("/api/products/Index")
   console.log(data); 
   const fetcher = (url: string) => fetch(url).then((response) => response.json());
