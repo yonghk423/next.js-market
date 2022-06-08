@@ -1,14 +1,48 @@
 import type { NextPage } from "next";
 import styled from "styled-components"
+import useSWR from 'swr'
+import { Product } from '@prisma/client'
+import { useRouter } from "next/router";
+
+interface ProductWithCount extends Product {
+  _count: {
+    favs: number;
+  }
+}
+
+interface ProductsResponse {
+  ok:boolean;
+  products: ProductWithCount[]
+}
 
 const Svg = styled.svg`
 width: 25px;
 height: 25px;
 `;
 
+interface ProductWithCount extends Product {
+  _count: {
+    favs: number;
+  }
+}
+
+interface ProductsResponse {
+  ok:boolean;
+  products: ProductWithCount[]
+}
+
 const Sold: NextPage = () => {
+  const router = useRouter()
+  console.log(router.query.id);
+  const id = router.query.id
+  const { data } = useSWR<ProductsResponse>("/api/products/Index")
+  const productData = data?.products?.filter((product)=> (
+    product.userId === +id!
+  ))
+  console.log(productData);
+  console.log(data); 
   return (
-    <div>
+    <div>      
       {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
         <div
           key={i}

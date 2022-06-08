@@ -4,7 +4,6 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import styled from "styled-components"
 import Layout from '../components/Layout'
-import useUser from '../libs/client/useUser'
 import { useRouter } from "next/router";
 import useSWR from 'swr'
 import { Product } from '@prisma/client'
