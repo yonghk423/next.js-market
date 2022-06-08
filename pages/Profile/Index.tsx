@@ -39,7 +39,7 @@ const Profile: NextPage = () => {
         <div>
           {user?.profile?.avatar ? (
             <img
-              src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${user?.profile?.avatar}/public`}              
+              src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${user?.profile?.avatar}/avatar`}              
             />
           ) : (
             <div/>

@@ -84,6 +84,7 @@ const ItemDetail: NextPage = () => {
     if(!data) return
     mutate({...data, isLiked: !data.isLiked }, false )
   }
+  console.log(data?.product?.user?.avatar);
   return (
     <Container>
       <MainBox>
@@ -99,7 +100,18 @@ const ItemDetail: NextPage = () => {
           </div>
         </MainInfoBox>
       </MainBox>  
-        <MainInfoDetailBox>
+        <MainInfoDetailBox>        
+          <img
+            src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${data?.product?.image}/public`}
+            
+          />
+          <div className="flex cursor-pointer py-3 border-t border-b items-center space-x-3">
+            <div className="w-12 h-12 rounded-full bg-slate-300" />
+            <img
+              src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${data?.product?.user?.avatar}/avatar`}
+              
+            />
+          </div> 
           <h1>{data?.product?.name}</h1>
           <p>{data?.product?.price}</p>
           <p>{data?.product?.description}</p>
