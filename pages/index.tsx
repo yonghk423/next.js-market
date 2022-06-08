@@ -7,6 +7,7 @@ import Layout from '../components/Layout'
 import { useRouter } from "next/router";
 import useSWR from 'swr'
 import { Product } from '@prisma/client'
+import useUser from '../libs/client/useUser'
 
 const Container = styled.div`  
   padding: 10px;
@@ -69,6 +70,7 @@ interface ProductsResponse {
 }
 
 const Home: NextPage = () => {
+  const user = useUser()
   const { data } = useSWR<ProductsResponse>("/api/products/Index")
   console.log(data); 
   const fetcher = (url: string) => fetch(url).then((response) => response.json());
