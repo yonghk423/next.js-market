@@ -8,7 +8,8 @@ interface ProfileResponse {
   profile: User
 }
 
-//다시 로그인 창으로 넘어 가도록 설정
+//*********다시 로그인 창으로 넘어 가도록 설정 해야 함
+
 const fetcher = (url: string) => fetch(url).then((response) => response.json());
 
 export default function useUser() {

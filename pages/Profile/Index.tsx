@@ -1,3 +1,5 @@
+// https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/<image_id>/public
+
 import type { NextPage } from "next";
 import styled from "styled-components"
 import Layout from '../../components/Layout';
@@ -17,7 +19,7 @@ const Profile: NextPage = () => {
   const router = useRouter();  
   const user = useUser();
   console.log(user);
-  console.log(user?.profile?.name);  
+  console.log(user?.profile?.avatar);  
 
   const onSoldClick = (id:number) => {
     router.push(
@@ -31,13 +33,21 @@ const Profile: NextPage = () => {
   };
   
   return (
-    <Layout  title="나의 배추" hasTabBar>
-    <div className="py-10 px-4">
+    <Layout>
+    <div>
       <div>
-        <div />
+        <div>
+          {user?.profile?.avatar ? (
+            <img
+              src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${user?.profile?.avatar}/public`}              
+            />
+          ) : (
+            <div/>
+          )}
+        </div>
         <div>
           <span>{user?.profile?.name}</span>
-          <Link href="/profile/edit">
+          <Link href="/profile/Edit">
             <a><span>Edit profile &rarr;</span></a>
           </Link>
         </div>
@@ -47,7 +57,7 @@ const Profile: NextPage = () => {
           <div>
             
           </div>
-          <div onClick={() => onSoldClick(user?.profile?.id)}>
+          <div onClick={() => onSoldClick(user?.profile?.id!)}>
             <Svg
               className="w-6 h-6"
               fill="none"

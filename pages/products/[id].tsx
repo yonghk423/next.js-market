@@ -129,7 +129,7 @@ const ItemDetail: NextPage = () => {
       <AddInfoBox>
         <h2>Similar items</h2>
         <div>
-          {data?.relatedProducts.map((product) => (
+          {data?.relatedProducts?.map((product) => (
             <AddInfoDetailBox key={product.id}>
               <AddInfoDetailImg/>
               <h3>{product.name}</h3>
