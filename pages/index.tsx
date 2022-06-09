@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import useSWR from 'swr'
 import { Product } from '@prisma/client'
 import useUser from '../libs/client/useUser'
-
+import client from "../libs/server/client"
 const Container = styled.div`  
   padding: 10px;
 `;
@@ -69,11 +69,11 @@ interface ProductsResponse {
   products: ProductWithCount[]
 }
 
-const Home: NextPage = () => {
+const Home: NextPage<{ products: ProductWithCount[] }> = ({ products }) => {
   const user = useUser()
   console.log(user);
-  const { data } = useSWR<ProductsResponse>("/api/products/Index")
-  console.log(data); 
+  // const { data } = useSWR<ProductsResponse>("/api/products/Index")
+  // console.log(data); 
   const fetcher = (url: string) => fetch(url).then((response) => response.json());
   const { data:profile } = useSWR("/api/users/Me", fetcher); 
   const router = useRouter();
@@ -103,13 +103,13 @@ const Home: NextPage = () => {
    <Layout title="홈" hasTabBar>
     <Head><title>Home</title></Head> 
       <Container>
-      {data?.products?.map((product) => (
+      {products?.map((product) => (
         <ItemListBox key={product.id}>          
-          <ItemBox onClick={() => onProductClick(product.id)}>  
+          <ItemBox onClick={() => onProductClick(product?.id)}>  
             <ImgBox></ImgBox>
             <InfoBox>
-              <h3>{product.name}</h3> 
-              <div>₩{product.price}</div>        
+              <h3>{product?.name}</h3> 
+              <div>₩{product?.price}</div>        
             </InfoBox>            
           </ItemBox>
           <StateImgBox>
@@ -128,7 +128,7 @@ const Home: NextPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-              <div>{product._count.favs}</div>
+              <div>{product._count?.favs}</div>
             </div>
             <div>
               <Svg
@@ -170,6 +170,16 @@ const Home: NextPage = () => {
     </Container>
    </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  const products = await client.product.findMany({});
+  console.log(products);
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    },
+  };
 }
 
 export default Home
