@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 import styled from "styled-components"
 import Layout from '../components/Layout'
 import { useRouter } from "next/router";
-import useSWR from 'swr'
+import useSWR, { SWRConfig } from 'swr'
 import { Product } from '@prisma/client'
 import useUser from '../libs/client/useUser'
 import client from "../libs/server/client"
@@ -20,7 +20,7 @@ const ItemListBox = styled.div`
   padding: 4px;  
   justify-content: space-between;
 `;
-const ImgBox = styled.div`
+const ImgBox = styled.img`
   width: 100px;
   height: 100px;
   border: 1px solid black;
@@ -69,11 +69,11 @@ interface ProductsResponse {
   products: ProductWithCount[]
 }
 
-const Home: NextPage<{ products: ProductWithCount[] }> = ({ products }) => {
+const Home: NextPage = () => {
   const user = useUser()
   console.log(user);
-  // const { data } = useSWR<ProductsResponse>("/api/products/Index")
-  // console.log(data); 
+  const { data } = useSWR<ProductsResponse>("/api/products/Index")
+  console.log(data); 
   const fetcher = (url: string) => fetch(url).then((response) => response.json());
   const { data:profile } = useSWR("/api/users/Me", fetcher); 
   const router = useRouter();
@@ -103,13 +103,17 @@ const Home: NextPage<{ products: ProductWithCount[] }> = ({ products }) => {
    <Layout title="홈" hasTabBar>
     <Head><title>Home</title></Head> 
       <Container>
-      {products?.map((product) => (
+      {data?.products?.map((product) => (
         <ItemListBox key={product.id}>          
           <ItemBox onClick={() => onProductClick(product?.id)}>  
-            <ImgBox></ImgBox>
+            <ImgBox
+             src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${product?.image}/public`} //Variants 다시 공부           
+             alt=""
+            />
             <InfoBox>
               <h3>{product?.name}</h3> 
-              <div>₩{product?.price}</div>        
+              <div>₩{product?.price}</div>
+                      
             </InfoBox>            
           </ItemBox>
           <StateImgBox>
@@ -128,7 +132,7 @@ const Home: NextPage<{ products: ProductWithCount[] }> = ({ products }) => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-              <div>{product._count?.favs}</div>
+              <div>{product._count?.favs || 0}</div>
             </div>
             <div>
               <Svg
@@ -172,6 +176,18 @@ const Home: NextPage<{ products: ProductWithCount[] }> = ({ products }) => {
   );
 }
 
+const Page:NextPage<{products:ProductWithCount[]}> = ({ products }) => {
+  return <SWRConfig value={{
+    fallback: {
+      "api/products/Index" : {
+        ok:true,
+        products
+      }
+    }
+  }}>
+    <Home/>
+  </SWRConfig>
+}
 export async function getServerSideProps() {
   const products = await client.product.findMany({});
   console.log(products);
@@ -182,4 +198,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default Home
+export default Page;
