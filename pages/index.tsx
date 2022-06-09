@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -112,8 +112,7 @@ const Home: NextPage = () => {
             />
             <InfoBox>
               <h3>{product?.name}</h3> 
-              <div>₩{product?.price}</div>
-                      
+              <div>₩{product?.price}</div>                      
             </InfoBox>            
           </ItemBox>
           <StateImgBox>
@@ -132,7 +131,7 @@ const Home: NextPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-              <div>{product._count?.favs || 0}</div>
+              <div>{product._count?.favs}</div>
             </div>
             <div>
               <Svg
