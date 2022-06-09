@@ -1,12 +1,12 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+//previewFeatures = ["referentialIntegrity"] 다른 객체에 연결 될 때 그 객체가 존재하길 바람
 
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
-//previewFeatures = ["referentialIntegrity"] 다른 객체에 연결 될 때 그 객체가 존재하길 바람
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
