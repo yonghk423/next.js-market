@@ -4,31 +4,33 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Link from 'next/link';
 import { Product, User } from '@prisma/client';
+import Image from 'next/image';
 
 const Container = styled.div`
 padding: 50px;
+display: grid;
+grid-template-columns: auto;
+justify-content: center;
 `;
 
 const MainBox = styled.div`
 border: 1px solid black;
 display: grid;
-grid-template-columns: auto;
 `;
 
-const MainImg = styled.div`
+const MainImg = styled(Image)`
   border: 1px solid black;  
-  background-color: #75a475;
-  padding: 90px;
+  /* background-color: #75a475; 
+  width: 380px;
+  height: 380px; */
 `;
 
 const MainInfoBox = styled.div`
 border: 1px solid black;
 `;
 
-const ProfileImg = styled.div`
+const ProfileImg = styled(Image)`
 border: 1px solid black;
-width: 50px;
-height: 50px;
 border-radius: 50px;
 `;
 
@@ -87,37 +89,35 @@ const ItemDetail: NextPage = () => {
   console.log(data?.product?.user?.avatar);
   return (
     <Container>
-      <MainBox>
-        <MainImg></MainImg>
-        <MainInfoBox>
-          <ProfileImg>
-          </ProfileImg>          
-          <div>
-            <p>{data?.product?.user?.name}</p>
-            {/* <Link href={`/users/profiles/${data?.product?.user?.id}`}> */}
-              <a>View profile &rarr;</a>
-            {/* </Link> */}
-          </div>
+      <MainBox>         
+        <MainImg 
+          width={380}
+          height={380}
+          src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${data?.product?.image}/public`} //Variants 다시 공부           
+          alt=""
+          />       
+        <MainInfoBox> 
+        <ProfileImg
+          width={50}
+          height={50}
+          src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${data?.product?.user?.avatar}/avatar`}   
+          alt=""
+          />        
+        <div>
+          <p>{data?.product?.user?.name}</p>
+          {/* <Link href={`/users/profiles/${data?.product?.user?.id}`}> */}
+          <a>View profile &rarr;</a>
+          {/* </Link> */}
+        </div>
         </MainInfoBox>
       </MainBox>  
-        <MainInfoDetailBox>        
-          <img
-            src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${data?.product?.image}/public`}
-            
-          />
-          <div className="flex cursor-pointer py-3 border-t border-b items-center space-x-3">
-            <div className="w-12 h-12 rounded-full bg-slate-300" />
-            <img
-              src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${data?.product?.user?.avatar}/avatar`}
-              
-            />
-          </div> 
-          <h1>{data?.product?.name}</h1>
-          <p>{data?.product?.price}</p>
-          <p>{data?.product?.description}</p>
-          <div>
-            <button>Talk to seller</button>
-            <button 
+      <MainInfoDetailBox>       
+        <h1>{data?.product?.name}</h1>
+        <p>{data?.product?.price}</p>
+        <p>{data?.product?.description}</p>
+        <div>
+          <button>Talk to seller</button>
+          <button 
             onClick={onFavClick} 
             style={ data?.isLiked ? { color:'red'} : {color : 'white'} }
             >
@@ -135,10 +135,10 @@ const ItemDetail: NextPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-            </button>
-          </div>
+          </button>
+        </div>
         </MainInfoDetailBox>      
-      <AddInfoBox>
+        <AddInfoBox>
         <h2>Similar items</h2>
         <div>
           {data?.relatedProducts?.map((product) => (
@@ -149,7 +149,7 @@ const ItemDetail: NextPage = () => {
             </AddInfoDetailBox>
           ))}
         </div>
-      </AddInfoBox>
+        </AddInfoBox>
     </Container>
   );
 };
