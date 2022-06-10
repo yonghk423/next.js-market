@@ -72,10 +72,10 @@ interface ProductsResponse {
 const Home: NextPage = () => {
   const user = useUser()
   console.log(user);
-  const { data } = useSWR<ProductsResponse>("/api/products/test")
+  const { data } = useSWR<ProductsResponse>("/api/products/Index")
   console.log(data); 
   const fetcher = (url: string) => fetch(url).then((response) => response.json());
-  const { data:profile } = useSWR("/api/users/me", fetcher); 
+  const { data:profile } = useSWR("/api/users/Me", fetcher); 
   const router = useRouter();
   const onBtnClick = (id:number) => {
     router.push(
@@ -178,7 +178,7 @@ const Home: NextPage = () => {
 const Page:NextPage<{products:ProductWithCount[]}> = ({ products }) => {
   return <SWRConfig value={{
     fallback: {
-      "api/products/test" : {
+      "api/products/Index" : {
         ok:true,
         products
       }
