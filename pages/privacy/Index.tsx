@@ -24,7 +24,7 @@ const Profile: NextPage = () => {
   const onSoldClick = (id:number) => {
     router.push(
       {
-        pathname: '/profile/Sold',
+        pathname: '/privacy/Sold',
         query: {
           id
         },
@@ -47,7 +47,7 @@ const Profile: NextPage = () => {
         </div>
         <div>
           <span>{user?.profile?.name}</span>
-          <Link href="/profile/Edit">
+          <Link href="privacy/Edit">
             <a><span>Edit profile &rarr;</span></a>
           </Link>
         </div>
