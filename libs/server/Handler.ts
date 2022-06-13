@@ -23,6 +23,7 @@ export default function Handler({
     res: NextApiResponse 
     ): Promise<any> {
     if (req.method && !methods.includes(req.method as any)) {
+      console.log(req.method);
       return res.status(405).end();
     }
     if(isPrivate && !req.session.user) {

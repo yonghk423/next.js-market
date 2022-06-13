@@ -4,33 +4,34 @@ import { useState } from "react";
 import styled from "styled-components"
 
 const Container = styled.div`
-    margin: 100px;
+  /* border: 1px solid black; */
+  margin: 100px;
 `;
 const MainTitle = styled.div`
-  font-size: 30px;  
+  border: 1px solid black;
+  font-size: 50px;  
   text-align: center;
 `;
 
 const ContainerSub = styled.div` 
+  box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.5); 
+  /* border: 1px solid black; */
 `;
 
 const EmailPhoneBtnBox = styled.div`
+  border: 1px solid black;
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;  
 `;
 
-const LoginBtn = styled.button`  
+const LoginBtn = styled.button`
+ border: 1px solid black;
+ 
 `;
 
 const FormBox = styled.form`
-  display: grid;
-  grid-template-columns: auto;
-  justify-content: center;
-`;
-const SocialLoginBox = styled.div`
-`;
-const SocialLoginTitile = styled.div`
+  border: 1px solid black;
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
@@ -88,8 +89,7 @@ export default function Login() {
     const data:ObjectConstructor = Object.assign({ "email" : value })
     console.log(data);
     setEmail(data);
-  };
-  
+  };  
 
    const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {   
      //클릭하면 false -> true로 전환 되며    
@@ -205,16 +205,7 @@ useEffect(() => {
             {method === "phone" ? "Get one-time password" : null}
           </button>    
           }                 
-        </FormBox>
-        <SocialLoginBox>                      
-          <SocialLoginTitile>
-            <span>Social Login</span>
-          </SocialLoginTitile>          
-          <SocialLoginBtnBox>
-            <button>Twitter</button>
-            <button>GitHub</button>
-          </SocialLoginBtnBox>
-        </SocialLoginBox>
+        </FormBox>        
       </ContainerSub>
     </Container>
   );
