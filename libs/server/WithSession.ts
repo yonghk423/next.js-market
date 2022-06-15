@@ -9,7 +9,7 @@ declare module "iron-session" {
 }
 
 const cookieOptions = {
-  cookieName: " baechusession",
+  cookieName: "baechusession",
   password: process.env.COOKIE_PASSWORD!,
 };
 
