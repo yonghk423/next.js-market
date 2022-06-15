@@ -31,6 +31,17 @@ const Profile: NextPage = () => {
       },      
     );
   };
+
+  const onLovedClick = (id:number) => {
+    router.push(
+      {
+        pathname: '/privacy/Loved',
+        query: {
+          id
+        },
+      },      
+    );
+  };
   
   return (
     <Layout>
@@ -46,8 +57,8 @@ const Profile: NextPage = () => {
           )}
         </div>
         <div>
-          <span>{user?.profile?.name}</span>
-          <Link href="privacy/Edit">
+          <div>{user?.profile?.name}</div>
+          <Link href="/privacy/Edit">
             <a><span>Edit profile &rarr;</span></a>
           </Link>
         </div>
@@ -75,7 +86,7 @@ const Profile: NextPage = () => {
             <h1>판매 내역</h1>
           </div>
         </div>
-        <div>
+        {/* <div>
           <div>
             <Svg
               className="w-6 h-6"
@@ -93,8 +104,8 @@ const Profile: NextPage = () => {
             </Svg>
           </div>
           <span>구매내역</span>
-        </div>
-        <div>
+        </div> */}
+        <div onClick={() => onLovedClick(user?.profile?.id!)}>
           <div>
             <Svg
               className="w-6 h-6"
@@ -111,7 +122,7 @@ const Profile: NextPage = () => {
               ></path>
             </Svg>
           </div>
-          <span>관심목록</span>
+          <div>관심목록</div>
         </div>
       </div>
       <div>

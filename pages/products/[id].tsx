@@ -116,7 +116,7 @@ const ItemDetail: NextPage = () => {
         <p>{data?.product?.price}</p>
         <p>{data?.product?.description}</p>
         <div>
-          <button>Talk to seller</button>
+          {/* <button>Talk to seller</button> */}
           <button 
             onClick={onFavClick} 
             style={ data?.isLiked ? { color:'red'} : {color : 'white'} }

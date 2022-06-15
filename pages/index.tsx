@@ -9,10 +9,10 @@ import useSWR, { SWRConfig } from 'swr'
 import { Product } from '@prisma/client'
 import useUser from '../libs/client/useUser'
 import client from "../libs/server/client"
+
 const Container = styled.div`  
   padding: 10px;
 `;
-
 const ItemListBox = styled.div`
   border: 1px solid black;
   display: flex;
@@ -32,7 +32,6 @@ const ItemBox = styled.div`
   display: grid;
   grid-template-columns: auto auto;
 `;
-
 const InfoBox = styled.div`
 `;
 const StateImgBox = styled.div``;

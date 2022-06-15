@@ -1,12 +1,30 @@
 import type { NextPage } from "next";
 import styled from "styled-components"
+import useSWR from 'swr'
+import { Product } from '@prisma/client'
+import { useRouter } from "next/router";
 
 const Svg = styled.svg`
 width: 25px;
 height: 25px;
 `;
 
+interface ProductWithCount extends Product {
+  _count: {
+    favs: number;
+  }
+}
+
+interface ProductsResponse {
+  ok:boolean;
+  products: ProductWithCount[]
+}
+
+
 const Loved: NextPage = () => {
+  const { data } = useSWR<ProductsResponse>("/api/users/me/favs")
+  console.log(data);
+
   return (
     <div>
       {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
