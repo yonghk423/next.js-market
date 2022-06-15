@@ -1,4 +1,4 @@
-import twilio from "twilio";
+// import twilio from "twilio";
 import { NextApiRequest, NextApiResponse } from 'next';
 import client from '../../../libs/server/client';
 import Handler, { ResponseType } from "../../../libs/server/Handler"
@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
     },
   });
 
-const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+// const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 interface Data {
   email:string;
@@ -49,12 +49,12 @@ async function handler(
   });
 
   if (phone) {
-    const message = await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_MSID,
-      to: process.env.MY_PHONE!,
-      body: `Your login token is ${payload}.`,
-    });
-    console.log(message);
+    // const message = await twilioClient.messages.create({
+    //   messagingServiceSid: process.env.TWILIO_MSID,
+    //   to: process.env.MY_PHONE!,
+    //   body: `Your login token is ${payload}.`,
+    // });
+    // console.log(message);
   } else if (email) {
       const sendEmail = await transporter.sendMail({
         from: `hello <yonghk423@naver.com>`,
