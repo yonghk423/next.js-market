@@ -9,6 +9,15 @@ import { useForm } from "react-hook-form";
 //disable 유효성 검사 해야 함
 //post 요청 에러 Cannot set headers after they are sent to the client 데이터 바뀌고 있음 
 
+const Container = styled.div`
+border: 1px solid black;
+padding: 10px;
+`;
+
+const FormContainer = styled.form`
+  padding: 10px;
+`;
+
 interface EditProfileForm {
   email?: string;
   phone?: string;
@@ -91,8 +100,8 @@ const EditProfile: NextPage = () => {
     }
   }, [avatar]);
   return (
-    <div>
-      <form onSubmit={handleSubmit(onValid)} className="py-10 px-4 space-y-4">
+    <Container>
+      <FormContainer onSubmit={handleSubmit(onValid)} className="py-10 px-4 space-y-4">
         <div className="flex items-center space-x-3">
           {avatarPreview ? (
             <img
@@ -138,8 +147,8 @@ const EditProfile: NextPage = () => {
           </div>
         ) : null}
         <button value={loading ? "Loading..." : "Update profile"} >업로드</button>
-      </form>
-    </div>
+      </FormContainer>
+    </Container>
   );
 };
 

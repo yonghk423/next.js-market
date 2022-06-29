@@ -9,11 +9,58 @@ import { useRouter } from "next/router";
 import useUser from '../../libs/client/useUser';
 import { User } from '@prisma/client';
 
+const Container = styled.div`
+  padding: 10px;
+`;
+
+const ImgUsernameBox = styled.div`
+  padding: 10px;
+  border: 1px solid black;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+`;
+
+const Img = styled.img`
+  border-radius: 20px;
+  width: 400px;
+  height: 400px;  
+`;
+
+const ProfileBox = styled.a`
+  padding: 10px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  justify-items: center;
+  grid-column-gap: 20px;
+`;
+
+const SoldBox = styled.div`
+  padding: 10px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  justify-items: center;
+  grid-column-gap: 20px;
+`;
+
+const FavBox = styled.div`
+  padding: 10px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  justify-items: center;
+  grid-column-gap: 20px;
+`;
+
 const Svg = styled.svg`
 width: 25px;
 height: 25px;
 `;
-
 
 const Profile: NextPage = () => {
   const router = useRouter();  
@@ -45,30 +92,33 @@ const Profile: NextPage = () => {
   
   return (
     <Layout>
-    <div>
-      <div>
+    <Container>
+      <ImgUsernameBox>  
         <div>
           {user?.profile?.avatar ? (
-            <img
+            <Img
               src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${user?.profile?.avatar}/avatar`}              
             />
           ) : (
             <div/>
           )}
         </div>
+        <div>{user?.profile?.name}</div>
+      </ImgUsernameBox>
         <div>
-          <div>{user?.profile?.name}</div>
-          <Link href="/privacy/Edit">
-            <a><span>Edit profile &rarr;</span></a>
+          <Link href="/privacy/Edit">            
+            <ProfileBox>              
+              <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                <path d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+              </Svg>
+              <div>Edit profile</div>
+            </ProfileBox>
           </Link>
         </div>
-      </div>
+      
       <div>
-        <div>
-          <div>
-            
-          </div>
-          <div onClick={() => onSoldClick(user?.profile?.id!)}>
+          <SoldBox onClick={() => onSoldClick(user?.profile?.id!)}>
             <Svg
               className="w-6 h-6"
               fill="none"
@@ -84,28 +134,8 @@ const Profile: NextPage = () => {
               ></path>              
             </Svg>
             <h1>판매 내역</h1>
-          </div>
-        </div>
-        {/* <div>
-          <div>
-            <Svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              ></path>
-            </Svg>
-          </div>
-          <span>구매내역</span>
-        </div> */}
-        <div onClick={() => onLovedClick(user?.profile?.id!)}>
+          </SoldBox>
+        <FavBox onClick={() => onLovedClick(user?.profile?.id!)}>
           <div>
             <Svg
               className="w-6 h-6"
@@ -123,7 +153,7 @@ const Profile: NextPage = () => {
             </Svg>
           </div>
           <div>관심목록</div>
-        </div>
+        </FavBox>
       </div>
       <div>
         <div>
@@ -134,7 +164,7 @@ const Profile: NextPage = () => {
           </div>
         </div>         
       </div>
-    </div>
+    </Container>
     </Layout>
   );
 };
