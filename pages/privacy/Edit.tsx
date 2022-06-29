@@ -10,12 +10,55 @@ import { useForm } from "react-hook-form";
 //post 요청 에러 Cannot set headers after they are sent to the client 데이터 바뀌고 있음 
 
 const Container = styled.div`
-border: 1px solid black;
-padding: 10px;
+  border: 1px solid black;
+  padding: 10px;
 `;
 
 const FormContainer = styled.form`
   padding: 10px;
+  border: 1px solid black;
+`;
+
+const ProfileImgBox = styled.div`
+  padding: 10px;
+  border: 1px solid black;  
+`;
+
+const Label = styled.label`
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+`;
+
+const Img = styled.img`
+  cursor: pointer;
+  border-radius: 20px;
+`;
+
+const FileInput = styled.input`
+  display: none;
+`;
+
+const InputDataBox = styled.div`
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  justify-items: center;  
+  grid-row-gap: 20px;
+`;
+
+const Input = styled.input`
+  width: 200px;
+`;
+
+const Button = styled.button`
+position: relative;
+width: 100px;
+height: 25px;
+color: #ffffff;
+background-color: #7eca8b;
+border: 0;
+outline: 0;
 `;
 
 interface EditProfileForm {
@@ -101,52 +144,52 @@ const EditProfile: NextPage = () => {
   }, [avatar]);
   return (
     <Container>
-      <FormContainer onSubmit={handleSubmit(onValid)} className="py-10 px-4 space-y-4">
-        <div className="flex items-center space-x-3">
-          {avatarPreview ? (
-            <img
-              src={avatarPreview}
-            />
-          ) : (
-            <div/>
-          )}
-          <label
+      <FormContainer onSubmit={handleSubmit(onValid)}>
+        <ProfileImgBox>
+          <Label
             htmlFor="picture"          
           >
-            Change
-            <input
+          {avatarPreview ? (
+            <Img src={avatarPreview}></Img>
+          ) : (
+            <div/>
+          )}        
+            <FileInput
               {...register("avatar")}
               id="picture"
               type="file"
-              className="hidden"
               accept="image/*"
             />
-          </label>
-        </div>
-        <input
-          {...register("name")}
-          required={false}          
-          name="name"
-          type="text"
-        />
-        <input
-          {...register("email")}
-          required={false}          
-          name="email"
-          type="email"
-        />
-        <input
-          {...register("phone")}
-          required={false}          
-          name="phone"
-          type="text"
-        />
-        {errors.formErrors ? (
-          <div className="my-2 text-red-500 font-medium text-center block">
+          </Label>
+        </ProfileImgBox>
+        <InputDataBox>
+          <Input
+            {...register("name")}
+            required={false}          
+            name="name"
+            type="text"
+          />
+          <Input
+            {...register("email")}
+            required={false}          
+            name="email"
+            type="email"
+            placeholder='email'
+          />
+          <Input
+            {...register("phone")}
+            required={false}          
+            name="phone"
+            type="text"
+            placeholder='phone number'
+          />
+          {errors.formErrors ? (
+          <div>
             {errors.formErrors.message}
           </div>
         ) : null}
-        <button value={loading ? "Loading..." : "Update profile"} >업로드</button>
+        <Button value={loading ? "Loading..." : "Update profile"} >업로드</Button>
+        </InputDataBox>      
       </FormContainer>
     </Container>
   );
