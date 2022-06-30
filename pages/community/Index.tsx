@@ -24,6 +24,7 @@ z-index: 1;
 `;
 
 const Container = styled.div`
+padding: 10px;
 border: 1px solid black;
 `;
 
@@ -33,22 +34,27 @@ border: 1px solid black;
 `;
 
 const MainTitleBox = styled.div`
+padding: 5px;
 border: 1px solid black;
 `;
 
 const Qbox = styled.div`
+padding: 5px;
 border: 1px solid black;
 `;
 
 const UserInfoBox = styled.div`
+padding: 5px;
 border: 1px solid black;
 `;
 
 const CuriousBox = styled.div`
+padding: 5px;
 border: 1px solid black;
 `;
 
 const AnswerBox = styled.div`
+padding: 5px;
 border: 1px solid black;
 
 `;

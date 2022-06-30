@@ -17,7 +17,7 @@ const ItemListBox = styled.div`
   border: 1px solid black;
   display: flex;
   border: 1px solid gray;
-  padding: 4px;  
+  padding: 5px;
   justify-content: space-between;
 `;
 const ImgBox = styled.img`
@@ -29,12 +29,16 @@ const ImgBox = styled.img`
   cursor: pointer;
 `
 const ItemBox = styled.div`
+  padding: 5px;
   display: grid;
   grid-template-columns: auto auto;
 `;
 const InfoBox = styled.div`
+padding: 5px;
 `;
-const StateImgBox = styled.div``;
+const StateImgBox = styled.div`
+padding: 5px;
+`;
 
 const BtnBox = styled.div`
 `;
