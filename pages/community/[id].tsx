@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styled from "styled-components"
 import useSWR from 'swr';
+import Image from 'next/image';
 
 const Container = styled.div`
 border: 1px solid black;
@@ -15,41 +16,44 @@ padding: 50px;
 
 const MainTitle = styled.div`
 border: 1px solid black;
-
+border-bottom: none;
+text-align: center;
 `;
 
 const UserInfoBox = styled.div`
-/* border: 1px solid black; */
-
+border: 1px solid black;
+border-bottom: none;
 `; 
 
-const UserImgBox = styled.div`
-border: 1px solid black;
-`;
-
-const UserImg = styled.div`
-border: 1px solid black;
-width: 25px;
-height: 25px;
+const ProfileImg = styled(Image)`
+/* border: 1px solid black; */
 border-radius: 50px;
-
 `;
 
 const UserInfo = styled.div`
 border: 1px solid black;
+border-left: none;
+border-right: none;
 `;
 
 const QuestionsBox = styled.div`
 border: 1px solid black;
-
+border-top: none;
 `;
 
 const QAstateBox = styled.div`
 border: 1px solid black;
+border-bottom: none;
+border-top: none;
+`;
+
+const Qbox = styled.div`
+  display: flex;
 `;
 
 const AnswerBox = styled.div`
 border: 1px solid black;
+border-bottom: none;
 `;
 
 const Svg = styled.svg`
@@ -59,7 +63,33 @@ height: 25px;
 
 const ReplyBox = styled.form`
   border: 1px solid black;
+  border-top: none;
+  display: grid;
+  grid-template-columns: auto;
+  grid-row-gap: 20px;
 `
+const Textarea = styled.textarea`
+  border: 5px solid rgb(121, 186, 136);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  /* width: 450px; */
+  height: 100px;
+  padding: 10px;
+  resize: none;
+  position: relative;
+  top: 20px;
+  outline-color: #2e732d;
+`;
+
+const Button = styled.button`
+position: relative;
+width: 100px;
+height: 25px;
+color: #ffffff;
+background-color: #7eca8b;
+border: 0;
+outline: 0;
+`;
 
 interface AnswerWithUSer extends Answer{
   user: User;
@@ -123,13 +153,16 @@ const CommunityPostDetail: NextPage = () => {
   
   return (
     <Container>
-      <MainTitle className="inline-flex my-3 ml-4 items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-        동네질문 {}
+      <MainTitle>
+        동네질문
       </MainTitle>
       <UserInfoBox>
-        <UserImgBox>
-          <UserImg/>
-        </UserImgBox>
+        <ProfileImg
+          width={50}
+          height={50}
+          src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${data?.post?.user?.avatar}/avatar`}   
+          alt=""
+          />   
         <UserInfo>
           <p>{data?.post?.user?.name}</p>
           {/* <Link href={`/users/profiles/${data?.post?.user?.id}`}>   */}            
@@ -161,9 +194,9 @@ const CommunityPostDetail: NextPage = () => {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               ></path>
             </Svg>
-            <button onClick={onClick}>궁금해요 {data?.post?._count?.wondering}</button>
+            <Button onClick={onClick}>궁금해요 {data?.post?._count?.wondering}</Button>
           </div>
-          <div>
+          <Qbox>
             <Svg
               className="w-4 h-4"
               fill="none"
@@ -179,31 +212,36 @@ const CommunityPostDetail: NextPage = () => {
               ></path>
             </Svg>
             <div>{data?.post?._count?.answers}</div>
-          </div>
+          </Qbox>
         </QAstateBox>
       </div>
-      <AnswerBox>
+      <AnswerBox>         
         {data?.post?.answers?.map(answer => (
+          <div key={answer?.id}>
+          <ProfileImg
+          width={50}
+          height={50}
+          src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${answer?.user?.avatar}/avatar`}   
+          alt=""
+          />   
           <div key={answer.id}>
           <div/>
           <div>
             <div>{answer.user.name}</div>
-            {/* <div>{answer.createdAt}</div> */}
             <p>{answer?.answer}</p>
           </div>
         </div>
-        ))}
-        
+        </div>
+        ))}       
       </AnswerBox>
       <ReplyBox onSubmit={onSubmit}>
-        <textarea onChange={onChange}
-          className="mt-1 shadow-sm w-full focus:ring-orange-500 rounded-md border-gray-300 focus:border-orange-500 "
+        <Textarea onChange={onChange}        
           rows={4}
           placeholder="Answer this question!"
         />
-        <button className="mt-2 w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none ">
+        <Button>
           Reply
-        </button>
+        </Button>
       </ReplyBox>
     </Container>
   );

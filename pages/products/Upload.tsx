@@ -6,6 +6,59 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components"
 import useMutation from '../../libs/client/useMutation';
 
+const Container = styled.div`
+  border: 1px solid black;
+  padding: 10px;
+`;
+
+const Img = styled.img`
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  border-radius: 20px;
+`;
+
+const FormContainer = styled.form`
+  padding: 10px;
+  border: 1px solid black;
+`;
+
+const ProfileImgBox = styled.div`
+  padding: 10px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+`;
+
+const Label = styled.label`
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+`;
+
+const FileInput = styled.input`
+  display: none;
+`;
+
+const InputDataBox = styled.div`
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  justify-items: center;  
+  grid-row-gap: 20px;
+`;
+
+const Button = styled.button`
+position: relative;
+width: 100px;
+height: 25px;
+color: #ffffff;
+background-color: #7eca8b;
+border: 0;
+outline: 0;
+`;
+
 const Svg = styled.svg`
 width: 250px;
 height: 250px;
@@ -57,16 +110,15 @@ const Upload: NextPage = () => {
     }
   }, [photo]);
   return (
-    <div>
-      <form className="p-4 space-y-4" onSubmit={handleSubmit(onValid)}>
-        <div>
+    <Container>
+      <FormContainer onSubmit={handleSubmit(onValid)}>
+        <ProfileImgBox>
           {photoPreview ? (
-            <img
+            <Img
               src={photoPreview}
-              className="w-full text-gray-600  h-46 rounded-md"
             />
           ) : (
-            <label className="w-full cursor-pointer text-gray-600 hover:border-orange-500 hover:text-orange-500 flex items-center justify-center border-2 border-dashed border-gray-300 h-48 rounded-md">
+            <Label>
               <Svg
                 className="h-12 w-12"
                 stroke="currentColor"
@@ -81,15 +133,15 @@ const Upload: NextPage = () => {
                   strokeLinejoin="round"
                 />
               </Svg>
-              <input
+              <FileInput
                 {...register("photo")}
                 accept="image/*"
-                className="hidden"
                 type="file"
               />
-            </label>
+            </Label>
           )}
-        </div>
+        </ProfileImgBox>
+        <InputDataBox>
         <input
           {...register("name", { required: true })}
           required          
@@ -100,16 +152,17 @@ const Upload: NextPage = () => {
           {...register("price", { required: true })}
           required
           name="price"
-          type="text"
+          type="number"
         />
         <textarea
           {...register("description", { required: true })}
           name="description"          
           required
         />
-        <button value={loading ? "Loading..." : "Upload item"}>업로드</button>
-      </form>
-    </div>
+        <Button value={loading ? "Loading..." : "Upload item"}>업로드</Button>
+        </InputDataBox>
+      </FormContainer>
+    </Container>
   );
 };
 

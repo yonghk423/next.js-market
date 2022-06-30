@@ -4,6 +4,23 @@ import { useEffect, useState } from 'react';
 import styled from "styled-components"
 import { useRouter } from "next/router";
 
+const Form = styled.form`
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  justify-items: center;
+`;
+
+const Button = styled.button`
+position: relative;
+width: 100px;
+height: 25px;
+color: #ffffff;
+background-color: #7eca8b;
+border: 0;
+outline: 0;
+`;
+
 interface Ipost {
   ok:boolean;
   post:Post;
@@ -47,15 +64,15 @@ const QWrite: NextPage = () => {
   }, [postData, router])
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       <textarea onChange={onChange}        
         rows={4}
-        placeholder="Ask a question!"
+        placeholder="질문을 남겨 주세요"
       />
-      <button>
+      <Button>
         Submit
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };
 

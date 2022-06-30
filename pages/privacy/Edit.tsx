@@ -21,7 +21,10 @@ const FormContainer = styled.form`
 
 const ProfileImgBox = styled.div`
   padding: 10px;
-  border: 1px solid black;  
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
 `;
 
 const Label = styled.label`
@@ -31,6 +34,8 @@ const Label = styled.label`
 `;
 
 const Img = styled.img`
+  width: 200px;
+  height: 200px;
   cursor: pointer;
   border-radius: 20px;
 `;
