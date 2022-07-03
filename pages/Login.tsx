@@ -37,12 +37,6 @@ const FormBox = styled.form`
   justify-content: center;
 `;
 
-const SocialLoginBtnBox = styled.div`
-  display: grid;
-  grid-template-columns: auto;
-  justify-content: center;
-`;
-
 export default function Login() { 
   const [mailTokenInput, setMailTokenInput] = useState(false);
   const [numberTokenInput , setNumberTokenInput] = useState(false)
