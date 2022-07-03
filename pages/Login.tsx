@@ -198,7 +198,11 @@ useEffect(() => {
             {method === "email" ? "Get login link" : null}
             {method === "phone" ? "Get one-time password" : null}
           </button>    
-          }                 
+          }
+          <div>테스트 이메일</div>
+          <div>yonghk423@naver.com</div>
+          <div>테스트 token number</div>
+          <div>791868</div>                 
         </FormBox>        
       </ContainerSub>    
     </Container>
