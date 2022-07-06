@@ -4,24 +4,10 @@ import { useState } from "react";
 import styled from "styled-components"
 import { motion } from "framer-motion";
 
-const Svg = styled(motion.svg)`
-  width: 100px;
-  height: 100px;
-  position: relative;
-  left: 10px;
-  background-color: hsla(0, 0%, 88.23529411764706%, 0.2);
-  border-radius: 15px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
-`;
-
-const myVars = {
-  start: { scale: 0 },
-  end: { scale : 1, rotateZ: 360, transition: { type: "spring", delay: 0.5 } }
-}
-
+//--------------------------------------------------------------------------------------------------------
 const Container = styled.div`
   padding: 50px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 100px;
 `;
 
@@ -35,7 +21,7 @@ const ContainerSub = styled.div`
 
 const TitleBox = styled.div`
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;
@@ -45,11 +31,71 @@ const TitleBox = styled.div`
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
-const MainTitle = styled.div`
-  /* border: 1px solid black; */
-  font-size: 50px;  
-  text-align: center;
+const MainTitle = styled(motion.div)`
+  width: 400px;
+  height: 100px;
+  display: grid;
+  line-height: 100px;
+  grid-template-columns: auto auto auto auto;
+  /* grid-template-columns: repeat(2, 1fr); */
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
+const boxVariants = {
+  start: {
+    opacity: 0,
+    scale: 0.5,
+  },
+  end: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      duration: 0.5,
+      bounce: 0.5,
+      delayChildren: 0.5,
+      staggerChildren: 0.2,
+    },
+  },
+}
+
+const circleVariants = {
+  start: {
+    opacity: 0,
+    y: 10,
+  },
+  end: {
+    opacity: 1,
+    y: 0,
+  },
+}
+
+const Circle = styled(motion.div)`
+  /* background-color: #e59d9d; */
+  font-size: 25px;
+  height: 100px;
+  width: 80px;
+  /* border: 1px solid black; */
+  text-align: center;
+  place-self: center;
+`;
+
+const Svg = styled(motion.svg)`
+  color: #86c786;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  left: 10px;
+  background-color: hsla(0, 0%, 88.23529411764706%, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`;
+
+const myVars = {
+  start: { scale: 0 },
+  end: { scale : 1, rotateZ: 360, transition: { type: "spring", delay: 0.5 } }
+}
 
 const EmailInput = styled.input`
 position: relative;
@@ -173,7 +219,12 @@ useEffect(() => {
     <Container>     
       <ContainerSub>
         <TitleBox>
-          <MainTitle>Welcome to baechu Market</MainTitle>  
+          <MainTitle variants={boxVariants} initial="start" animate="end">
+            <Circle variants={circleVariants}>Welcome</Circle>
+            <Circle variants={circleVariants}>to</Circle>
+            <Circle variants={circleVariants}>baechu</Circle>
+            <Circle variants={circleVariants}>Market</Circle>
+          </MainTitle>  
           <Svg variants={myVars} initial="start" animate="end"
            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
