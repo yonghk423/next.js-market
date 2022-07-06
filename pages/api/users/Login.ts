@@ -71,8 +71,6 @@ async function handler(
       .then((result: any) => console.log(result))
       .catch((err: any) => console.log(err))
     }
-  
-  
 
   return res.json({
     ok: true,

@@ -14,6 +14,7 @@ const TestLogin = () => {
     const router = useRouter();     
     //-----------------------------------------------------
     //email / phone number / name / 비밀번호 
+    const [token, setToken] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [name, setName] = useState('')
@@ -74,7 +75,7 @@ const TestLogin = () => {
     if(postTokenData !== "") {
       fetch("/api/users/Confirm", {
          method : "POST",
-         body: JSON.stringify('token value'),
+         body: JSON.stringify(postTokenData),
          headers: {
            "Content-Type": "application/json"
          } // api를 호출 할 때마다 headers를 설정해야 한다.
