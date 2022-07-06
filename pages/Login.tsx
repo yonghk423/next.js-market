@@ -17,6 +17,7 @@ const ContainerSub = styled.div`
   display: grid;
   grid-template-columns: auto;
   grid-row-gap: 20px;
+  border-radius: 10px;
 `;
 
 const TitleBox = styled.div`
@@ -73,10 +74,8 @@ const circleVariants = {
 
 const Circle = styled(motion.div)`
   /* background-color: #e59d9d; */
-  font-size: 25px;
-  height: 100px;
-  width: 80px;
-  /* border: 1px solid black; */
+  font-size: 25px;  
+  font-weight: bold;
   text-align: center;
   place-self: center;
 `;
