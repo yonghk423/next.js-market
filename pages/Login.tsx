@@ -11,7 +11,7 @@ const Container = styled.div`
   margin: 100px;
 `;
 
-const ContainerSub = styled.div` 
+const ContainerSub = styled(motion.div)` 
   box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.5); 
   /* border: 1px solid black; */
   display: grid;
@@ -33,6 +33,8 @@ const TitleBox = styled.div`
 `;
 
 const MainTitle = styled(motion.div)`
+  position: relative;
+  left: 40px;
   width: 400px;
   height: 100px;
   display: grid;
@@ -81,23 +83,24 @@ const Circle = styled(motion.div)`
 `;
 
 const Svg = styled(motion.svg)`
-  color: #86c786;
+  color: #29392b;
   width: 100px;
   height: 100px;
   position: relative;
-  left: 10px;
+  left: 50px;
   background-color: hsla(0, 0%, 88.23529411764706%, 0.2);
   border-radius: 15px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
-
 const myVars = {
   start: { scale: 0 },
-  end: { scale : 1, rotateZ: 360, transition: { type: "spring", delay: 0.5 } }
+  end: { scale : 1, rotateZ: 360, transition: { type: "spring", delay: 0.5, damping:10 } }
 }
 
+//-------------------------------------------------------------------------------------------------
 const EmailInput = styled.input`
 position: relative;
+top: -10px;
 width: 200px;
 height: 30px;
 font-size: 15px;
@@ -105,6 +108,8 @@ font-size: 15px;
 /* background-color: #7eca8b; */
 /* border: 0;
 outline: 0; */
+border: 2px solid #496f4d;
+border-radius: 5px;
 outline-color: #2e732d;
 `;
 
@@ -115,15 +120,16 @@ height: 30px;
 font-size: 15px;
 /* color: #ffffff; */
 border-radius: 5px;
-background-color: #7eca8b;
+background-color: #496f4d;
 border: 0;
 outline: 0;
-outline-color: #2e732d;
+outline-color: #496f4d;
 cursor: pointer;
 `;
 
 const TokenInput = styled.input`
 position: relative;
+top: -10px;
 width: 200px;
 height: 30px;
 font-size: 15px;
@@ -131,7 +137,9 @@ font-size: 15px;
 /* background-color: #7eca8b; */
 /* border: 0;
 outline: 0; */
-outline-color: #2e732d;
+border-radius: 5px;
+border: 2px solid #496f4d;
+outline-color: #496f4d;
 `;
 
 const SubmitBtn = styled.button`
@@ -141,10 +149,10 @@ height: 30px;
 font-size: 15px;
 /* color: #ffffff; */
 border-radius: 5px;
-background-color: #7eca8b;
+background-color:#496f4d;
 border: 0;
 outline: 0;
-outline-color: #2e732d;
+outline-color: #496f4d;
 `;
 
 const FormBox = styled.form`
@@ -152,6 +160,10 @@ const FormBox = styled.form`
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
+`;
+
+const TextBox = styled.div`
+  font-weight: bold;
 `;
 
 export default function Login() { 
@@ -237,7 +249,7 @@ useEffect(() => {
                 onChange={onEmailChange}
                 placeholder="Email"
                 required
-                />
+                />              
             </div>       
                 {
                   mailTokenInput ?
@@ -257,10 +269,12 @@ useEffect(() => {
             {method === "email" ? "Get login link" : null}            
           </LoginLinkBtn>    
           }
-          <div>테스트 이메일</div>
+        <TextBox>  
+          <div>test email</div>
           <div>yonghk423@naver.com</div>
-          <div>테스트 token number</div>
-          <div>791868</div>                 
+          <div>test token number</div>
+          <div>791868</div>
+        </TextBox>                   
         </FormBox>        
       </ContainerSub>    
     </Container>
