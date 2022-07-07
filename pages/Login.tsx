@@ -113,7 +113,7 @@ border-radius: 5px;
 outline-color: #2e732d;
 `;
 
-const LoginLinkBtn = styled.button`
+const LoginLinkBtn = styled(motion.button)`
 position: relative;
 width: 200px;
 height: 30px;
@@ -142,7 +142,7 @@ border: 2px solid #496f4d;
 outline-color: #496f4d;
 `;
 
-const SubmitBtn = styled.button`
+const SubmitBtn = styled(motion.button)`
 position: relative;
 width: 200px;
 height: 30px;
@@ -153,6 +153,7 @@ background-color:#496f4d;
 border: 0;
 outline: 0;
 outline-color: #496f4d;
+cursor: pointer;
 `;
 
 const FormBox = styled.form`
@@ -263,9 +264,16 @@ useEffect(() => {
                     ) : null
                 }
             </div>         
-          { tokenBtn && <SubmitBtn>submit</SubmitBtn> }   
+          { tokenBtn && <SubmitBtn 
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          submit</SubmitBtn> }   
           { !tokenBtn &&      
-          <LoginLinkBtn>            
+          <LoginLinkBtn
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+          >            
             {method === "email" ? "Get login link" : null}            
           </LoginLinkBtn>    
           }
