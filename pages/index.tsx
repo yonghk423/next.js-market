@@ -73,9 +73,7 @@ bottom: 20px;
 right: 30px;
 cursor: pointer;
 z-index: 1;
-box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.5); 
-
-
+box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.5);
 `;
 
 interface ProductWithCount extends Product {

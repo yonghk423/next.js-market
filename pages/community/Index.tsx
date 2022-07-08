@@ -4,23 +4,25 @@ import Link from 'next/link';
 import styled from "styled-components"
 import useSWR from 'swr';
 import Layout from '../../components/Layout';
+import { motion } from "framer-motion"
 
 const Svg = styled.svg`
 width: 25px;
 height: 25px;
 `;
 
-const BtnSvg = styled.svg`
-background-color: #4fc24f;
+const BtnSvg = styled(motion.svg)`
+background-color: #496f4d;
 color: white;
 border-radius: 100px;
 width: 50px;
 height: 50px;
 position: fixed;
-bottom: 0;
-right: 0;
+bottom: 20px;
+right: 30px;
 cursor: pointer;
 z-index: 1;
+box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.5);
 `;
 
 const Container = styled.div`
@@ -143,6 +145,8 @@ const Community: NextPage = () => {
       <Link href={"/community/QWrite"}> 
         <a>
         <BtnSvg
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           className="w-6 h-6"
           fill="none"
           stroke="currentColor"

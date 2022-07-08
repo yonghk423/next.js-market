@@ -10,12 +10,15 @@ import { useForm } from "react-hook-form";
 //post 요청 에러 Cannot set headers after they are sent to the client 데이터 바뀌고 있음 
 
 const Container = styled.div`
-  border: 1px solid black;
-  padding: 50px;
+  /* border: 1px solid black; */
+  padding: 100px;
 `;
 
 const FormContainer = styled.form`
   padding: 10px;
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
   /* border: 1px solid black; */
 `;
 
@@ -53,7 +56,18 @@ const InputDataBox = styled.div`
 `;
 
 const Input = styled.input`
-  width: 200px;
+position: relative;
+margin: 5px;
+width: 200px;
+height: 40px;
+font-size: 15px;
+/* color: #ffffff; */
+/* background-color: #7eca8b; */
+/* border: 0;
+outline: 0; */
+border: 2px solid #496f4d;
+border-radius: 5px;
+outline-color: #2e732d;
 `;
 
 const Button = styled.button`
@@ -170,12 +184,13 @@ const EditProfile: NextPage = () => {
         <InputDataBox>
           <Input
             {...register("name")}
+            placeholder='이름'
             required={false}          
             name="name"
             type="text"
           />
           <Input
-            {...register("email")}
+            {...register("email")}          
             required={false}          
             name="email"
             type="email"
