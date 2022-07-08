@@ -11,17 +11,17 @@ import { useForm } from "react-hook-form";
 
 const Container = styled.div`
   border: 1px solid black;
-  padding: 10px;
+  padding: 50px;
 `;
 
 const FormContainer = styled.form`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 
 const ProfileImgBox = styled.div`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
@@ -61,7 +61,7 @@ position: relative;
 width: 100px;
 height: 25px;
 color: #ffffff;
-background-color: #7eca8b;
+background-color:  #496f4d;
 border: 0;
 outline: 0;
 `;

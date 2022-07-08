@@ -14,12 +14,12 @@ justify-content: center;
 `;
 
 const MainBox = styled.div`
-border: 1px solid black;
+/* border: 1px solid black; */
 display: grid;
 `;
 
 const MainImg = styled(Image)`
-  border: 1px solid black;  
+  /* border: 1px solid black;   */
   /* background-color: #75a475; 
   width: 380px;
   height: 380px; */
@@ -27,15 +27,17 @@ const MainImg = styled(Image)`
 
 const MainInfoBox = styled.div`
 border: 1px solid black;
+border-bottom: none;
 `;
 
 const ProfileImg = styled(Image)`
-border: 1px solid black;
+/* border: 1px solid black; */
 border-radius: 50px;
 `;
 
 const MainInfoDetailBox = styled.div`
   border: 1px solid black;
+  border-bottom: none;
 `;
 
 const AddInfoBox = styled.div`

@@ -7,8 +7,8 @@ import styled from "styled-components"
 import useMutation from '../../libs/client/useMutation';
 
 const Container = styled.div`
-  border: 1px solid black;
-  padding: 10px;
+  /* border: 1px solid black; */
+  padding: 100px;
 `;
 
 const Img = styled.img`
@@ -20,12 +20,15 @@ const Img = styled.img`
 
 const FormContainer = styled.form`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);  
 `;
 
 const ProfileImgBox = styled.div`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
@@ -35,6 +38,7 @@ const Label = styled.label`
   display: grid;
   justify-content: center;
   justify-items: center;
+  cursor: pointer;
 `;
 
 const FileInput = styled.input`
@@ -46,7 +50,7 @@ const InputDataBox = styled.div`
   grid-template-columns: auto;
   justify-content: center;
   justify-items: center;  
-  grid-row-gap: 20px;
+  /* grid-row-gap: 10px; */
 `;
 
 const Button = styled.button`
@@ -54,7 +58,7 @@ position: relative;
 width: 100px;
 height: 25px;
 color: #ffffff;
-background-color: #7eca8b;
+background-color: #496f4d;
 border: 0;
 outline: 0;
 `;
@@ -62,6 +66,34 @@ outline: 0;
 const Svg = styled.svg`
 width: 250px;
 height: 250px;
+`;
+
+const Input = styled.input`
+position: relative;
+margin: 5px;
+width: 200px;
+height: 40px;
+font-size: 15px;
+/* color: #ffffff; */
+/* background-color: #7eca8b; */
+/* border: 0;
+outline: 0; */
+border: 2px solid #496f4d;
+border-radius: 5px;
+outline-color: #2e732d;
+`;
+
+const Textarea = styled.textarea`
+  border: 5px solid #496f4d;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  /* width: 450px; */
+  height: 100px;
+  padding: 10px;
+  resize: none;
+  position: relative;
+  /* top: 20px; */
+  outline-color: #2e732d;
 `;
 
 interface UploadProductForm {
@@ -79,6 +111,7 @@ interface UploadProductMutation {
 const Upload: NextPage = () => {
   const router = useRouter();
   const { register, handleSubmit, watch } = useForm<UploadProductForm>();
+  console.log(register, handleSubmit, watch);
   const [uploadProduct, { loading, data }] =
     useMutation<UploadProductMutation>("/api/products/Index");
   const onValid = async ({ name, price, description }: UploadProductForm) => {
@@ -142,24 +175,26 @@ const Upload: NextPage = () => {
           )}
         </ProfileImgBox>
         <InputDataBox>
-        <input
-          {...register("name", { required: true })}
-          required          
-          name="name"
-          type="text"
-        />
-        <input
-          {...register("price", { required: true })}
-          required
-          name="price"
-          type="number"
-        />
-        <textarea
-          {...register("description", { required: true })}
-          name="description"          
-          required
-        />
-        <Button value={loading ? "Loading..." : "Upload item"}>업로드</Button>
+          <Input
+            {...register("name", { required: true })}
+            required  
+            placeholder='상품의 이름을 입력 해주세요!'        
+            name="name"
+            type="text"
+          />
+          <Input
+            {...register("price", { required: true })}
+            placeholder='가격을 입력 해주세요!'
+            required
+            name="price"
+            type="number"
+          ></Input>
+          <Textarea
+            {...register("description", { required: true })}
+            name="description"          
+            required
+          />
+          <Button value={loading ? "Loading..." : "Upload item"}>업로드</Button>
         </InputDataBox>
       </FormContainer>
     </Container>

@@ -75,7 +75,6 @@ const circleVariants = {
 }
 
 const Circle = styled(motion.div)`
-  /* background-color: #e59d9d; */
   font-size: 25px;  
   font-weight: bold;
   text-align: center;
@@ -165,6 +164,7 @@ const FormBox = styled.form`
 
 const TextBox = styled.div`
   font-weight: bold;
+  margin: 10px;
 `;
 
 export default function Login() { 
