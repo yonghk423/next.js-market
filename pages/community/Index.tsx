@@ -27,37 +27,46 @@ box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.5);
 
 const Container = styled.div`
 padding: 10px;
-border: 1px solid black;
+margin: 5px;
+border: 2px solid #496f4d;
+
 `;
 
 const SubContainer = styled.div`
-margin: 10px;
-border: 1px solid black;
+  font-weight: bold;
+  margin: 10px;
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
 const MainTitleBox = styled.div`
 padding: 5px;
-border: 1px solid black;
+border: 2px solid #496f4d;;
+border-bottom: none;
 `;
 
 const Qbox = styled.div`
 padding: 5px;
-border: 1px solid black;
+border: 2px solid #496f4d;
+border-bottom: none;
 `;
 
 const UserInfoBox = styled.div`
 padding: 5px;
-border: 1px solid black;
+border: 2px solid #496f4d;
+border-bottom: none;
 `;
 
 const CuriousBox = styled.div`
 padding: 5px;
-border: 1px solid black;
+border: 2px solid #496f4d;
+border-bottom: none;
 `;
 
 const AnswerBox = styled.div`
 padding: 5px;
-border: 1px solid black;
+border: 2px solid #496f4d;
 
 `;
 interface PostsResponse {

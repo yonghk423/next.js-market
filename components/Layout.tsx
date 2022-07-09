@@ -28,6 +28,7 @@ const Title = styled.div`
   text-align: center;
   font-size: 25px;
   font-weight: bold;
+  margin: 10px;
 `;
 
 const Home = styled.div`
