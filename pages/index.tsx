@@ -37,13 +37,12 @@ const ItemBox = styled.div`
   cursor: pointer;
 `;
 const InfoBox = styled.div`
-padding: 10px;
-font-weight: bold;
+  padding: 10px;
+  font-weight: bold;
 `;
 const StateImgBox = styled.div`
 padding: 5px;
 `;
-
 const FavBox = styled.div`
   display: grid;
 `;
@@ -53,13 +52,11 @@ const FavCount = styled.div`
   left: 8px;
 `;
 
-
 const BtnBox = styled.div`
 `;
-
 const Svg = styled.svg`
-width: 25px;
-height: 25px;
+  width: 25px;
+  height: 25px;
 `;
 
 const BtnSvg = styled(motion.svg)`

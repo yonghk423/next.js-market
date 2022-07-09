@@ -9,11 +9,12 @@ const Container = styled.div`
   padding: 10px;
 `;
 const ItemListBox = styled.div`
-  border: 1px solid black;
   display: flex;
-  border: 1px solid gray;
-  padding: 4px;  
+  padding: 5px;
   justify-content: space-between;
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 const ImgBox = styled.img`
   width: 100px;
@@ -22,16 +23,28 @@ const ImgBox = styled.img`
   border-radius: 10px;
   background-color: gray;
   cursor: pointer;
-`
+`;
 const ItemBox = styled.div`
+  padding: 5px;
   display: grid;
   grid-template-columns: auto auto;
+  cursor: pointer;
 `;
 const InfoBox = styled.div`
+padding: 10px;
+  font-weight: bold;
 `;
-const StateImgBox = styled.div``;
+const StateImgBox = styled.div`
+padding: 5px;
+`;
 
-const BtnBox = styled.div`
+const FavBox = styled.div`
+  display: grid;
+`;
+
+const FavCount = styled.div`
+  position: relative;
+  left: 8px;
 `;
 
 const Svg = styled.svg`
@@ -101,7 +114,7 @@ const Loved: NextPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-              <div>{fav?.product._count?.favs}</div>
+              <FavCount>{fav?.product._count?.favs}</FavCount>
             </div>
             <div>
               <Svg
