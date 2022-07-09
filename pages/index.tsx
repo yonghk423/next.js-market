@@ -95,7 +95,7 @@ const Home: NextPage = () => {
   const onBtnClick = (id:number) => {
     router.push(
       {
-        pathname: '/upload',
+        pathname: '/products/Upload',
         query: {
           id
         },
