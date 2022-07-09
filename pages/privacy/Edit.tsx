@@ -13,7 +13,6 @@ import Head from "next/head"
 //post 요청 에러 Cannot set headers after they are sent to the client 데이터 바뀌고 있음 
 
 const Container = styled.div`
-  /* border: 1px solid black; */
   padding: 100px;
 `;
 
