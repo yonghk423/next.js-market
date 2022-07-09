@@ -163,7 +163,7 @@ const CommunityPostDetail: NextPage = () => {
           "Content-Type": "application/json"
          } // api를 호출 할 때마다 headers를 설정해야 한다.
        })
-      //  setPostData("") // 초기화 안됨 해결 해야 함
+      setPostData("");
   }
   const onClick = () => {    
     fetch(`/api/posts/${router.query.id}/wonder`, {
@@ -261,7 +261,8 @@ const CommunityPostDetail: NextPage = () => {
         ))}       
       </AnswerBox>
       <ReplyBox onSubmit={onSubmit}>
-        <Textarea onChange={onChange}        
+        <Textarea onChange={onChange}
+          value={postData}        
           rows={4}
           placeholder="Answer this question!"
         />
