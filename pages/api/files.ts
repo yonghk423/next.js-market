@@ -14,7 +14,7 @@ async function handler(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer -tHiOYxTSwnDqfeGL79ylStCXc59VuNPn1b9CYeq`,
+          Authorization: `Bearer `,
         },
       }
     )
