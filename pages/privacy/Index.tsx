@@ -75,6 +75,11 @@ width: 25px;
 height: 25px;
 `;
 
+const ProfileSvg = styled.svg`
+  width: 100px;
+  height: 100px;
+`
+
 const Profile: NextPage = () => {
   const router = useRouter();  
   const user = useUser();
@@ -116,7 +121,9 @@ const Profile: NextPage = () => {
               src={`https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/${user?.profile?.avatar}/avatar`}              
             />
           ) : (
-            <div/>
+            <ProfileSvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+            </ProfileSvg>
           )}
         </div>
         <div>{user?.profile?.name}</div>

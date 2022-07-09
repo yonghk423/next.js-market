@@ -84,6 +84,12 @@ outline: 0;
 cursor: pointer;
 `;
 
+const Svg = styled.svg`
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+`
+
 interface EditProfileForm {
   email?: string;
   phone?: string;
@@ -178,7 +184,9 @@ const EditProfile: NextPage = () => {
           {avatarPreview ? (
             <Img src={avatarPreview}></Img>
           ) : (
-            <div/>
+            <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+            </Svg>
           )}        
             <FileInput
               {...register("avatar")}
