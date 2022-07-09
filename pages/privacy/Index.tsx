@@ -89,7 +89,7 @@ const Profile: NextPage = () => {
   const onSoldClick = (id:number) => {
     router.push(
       {
-        pathname: '/privacy/sold',
+        pathname: '/privacy/Sold',
         query: {
           id
         },
@@ -100,7 +100,7 @@ const Profile: NextPage = () => {
   const onLovedClick = (id:number) => {
     router.push(
       {
-        pathname: '/privacy/loved',
+        pathname: '/privacy/Loved',
         query: {
           id
         },
@@ -129,7 +129,7 @@ const Profile: NextPage = () => {
         <div>{user?.profile?.name}</div>
       </ImgUsernameBox>
         <div>
-          <Link href="/privacy/edit">            
+          <Link href="/privacy/Edit">            
             <ProfileBox>              
               <Svg 
               whileHover={{ scale: 1.1 }}
