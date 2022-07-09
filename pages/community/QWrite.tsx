@@ -7,19 +7,38 @@ import Head from "next/head"
 
 const Form = styled.form`
   display: grid;
+  padding: 100px;
+  margin: 50px;
   grid-template-columns: auto;
   justify-content: center;
   justify-items: center;
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  
+`;
+
+const Textarea = styled.textarea`
+  border: 2px solid #496f4d;
+  border-radius : 10px;
+  width: 450px;
+  height: 100px;
+  padding: 10px;
+  resize: none;
+  position: relative;
+  outline-color:  #496f4d;
+  margin: 5px;
 `;
 
 const Button = styled.button`
-position: relative;
-width: 100px;
-height: 25px;
-color: #ffffff;
-background-color: #7eca8b;
-border: 0;
-outline: 0;
+  position: relative;
+  width: 80px;
+  height: 25px;
+  color: #ffffff;
+  background-color:  #496f4d;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
 `;
 
 interface Ipost {
@@ -70,7 +89,7 @@ const QWrite: NextPage = () => {
       <title>질문 올리기</title>
     </Head>
     <Form onSubmit={onSubmit}>
-      <textarea onChange={onChange}        
+      <Textarea onChange={onChange}        
         rows={4}
         placeholder="질문을 남겨 주세요"
       />
