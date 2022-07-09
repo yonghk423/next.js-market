@@ -1,6 +1,7 @@
 // https://imagedelivery.net/KIkx1DioUEY-Y5COTODk1Q/<image_id>/public
 
 import type { NextPage } from "next";
+import Head from "next/head"
 import styled from "styled-components"
 import Layout from '../../components/Layout';
 import useSWR from 'swr'
@@ -104,6 +105,9 @@ const Profile: NextPage = () => {
   
   return (
     <Layout>
+      <Head>
+        <title>나의 정보</title>
+      </Head>
     <Container>
       <ImgUsernameBox>  
         <div>

@@ -5,6 +5,7 @@ import { useEffect,  useState } from 'react';
 import { useForm } from "react-hook-form";
 import styled from "styled-components"
 import useMutation from '../../libs/client/useMutation';
+import Head from 'next/head'
 
 const Container = styled.div`
   /* border: 1px solid black; */
@@ -144,6 +145,9 @@ const Upload: NextPage = () => {
   }, [photo]);
   return (
     <Container>
+      <Head>
+        <title>상품 등록하기</title>
+      </Head>
       <FormContainer onSubmit={handleSubmit(onValid)}>
         <ProfileImgBox>
           {photoPreview ? (

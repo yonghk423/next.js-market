@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import Link from 'next/link';
 import { Product, User } from '@prisma/client';
 import Image from 'next/image';
+import Head from 'next/head'
 
 const Container = styled.div`
   padding: 50px;
@@ -117,6 +118,9 @@ const ItemDetail: NextPage = () => {
   console.log(data?.product?.user?.avatar);
   return (
     <Container>
+      <Head>
+        <title>상품 정보</title>
+      </Head>
       <SubContainer>
       <MainBox>         
         <MainImg 

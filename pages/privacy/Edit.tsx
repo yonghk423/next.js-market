@@ -5,7 +5,9 @@ import styled from "styled-components"
 import useMutation from '../../libs/client/useMutation';
 import useUser from '../../libs/client/useUser';
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import Head from "next/head"
+
 // 수정 해야 할 것들 
 //disable 유효성 검사 해야 함
 //post 요청 에러 Cannot set headers after they are sent to the client 데이터 바뀌고 있음 
@@ -165,6 +167,9 @@ const EditProfile: NextPage = () => {
   }, [avatar]);
   return (
     <Container>
+      <Head>
+        <title>프로필 편집</title>
+      </Head>
       <FormContainer onSubmit={handleSubmit(onValid)}>
         <ProfileImgBox>
           <Label

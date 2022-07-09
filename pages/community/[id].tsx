@@ -7,6 +7,7 @@ import { useState } from 'react';
 import styled from "styled-components"
 import useSWR from 'swr';
 import Image from 'next/image';
+import Head from "next/head"
 
 const Container = styled.div`
   padding: 50px;
@@ -179,6 +180,9 @@ const CommunityPostDetail: NextPage = () => {
   
   return (
     <Container>
+      <Head>
+        <title>Q&A 소통하기</title>
+      </Head>
       <MainTitle>
         동네질문
       </MainTitle>

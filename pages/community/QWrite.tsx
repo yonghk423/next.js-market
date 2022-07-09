@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from 'react';
 import styled from "styled-components"
 import { useRouter } from "next/router";
+import Head from "next/head"
 
 const Form = styled.form`
   display: grid;
@@ -64,6 +65,10 @@ const QWrite: NextPage = () => {
   }, [postData, router])
 
   return (
+    <>
+    <Head>
+      <title>질문 올리기</title>
+    </Head>
     <Form onSubmit={onSubmit}>
       <textarea onChange={onChange}        
         rows={4}
@@ -73,6 +78,7 @@ const QWrite: NextPage = () => {
         Submit
       </Button>
     </Form>
+    </>
   );
 };
 

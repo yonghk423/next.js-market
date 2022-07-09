@@ -3,6 +3,7 @@ import styled from "styled-components"
 import useSWR from 'swr'
 import { Product } from '@prisma/client'
 import { useRouter } from "next/router";
+import Head from "next/head"
 
 const Container = styled.div`  
   padding: 10px;
@@ -69,6 +70,9 @@ const Loved: NextPage = () => {
 
   return (
      <Container>
+      <Head>
+        <title>관심 목록</title>
+      </Head>
        {data?.favs?.map((fav:any) => (
         <ItemListBox key={fav.id}>          
           <ItemBox onClick={() => onProductClick(fav?.product?.id)}>  

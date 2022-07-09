@@ -3,6 +3,7 @@ import styled from "styled-components"
 import useSWR from 'swr'
 import { Product } from '@prisma/client'
 import { useRouter } from "next/router";
+import Head from "next/head"
 
 interface ProductWithCount extends Product {
   _count: {
@@ -85,6 +86,9 @@ const Sold: NextPage = () => {
 
   return (
     <Container>
+      <Head>
+        <title>판매 중인 상품</title>
+      </Head>
        {productData?.map((product) => (
         <ItemListBox key={product.id}>          
           <ItemBox onClick={() => onProductClick(product?.id)}>  

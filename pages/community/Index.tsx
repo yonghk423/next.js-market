@@ -1,5 +1,6 @@
 import { Post, User } from "@prisma/client";
 import type { NextPage } from "next";
+import Head from "next/head"
 import Link from 'next/link';
 import styled from "styled-components"
 import useSWR from 'swr';
@@ -92,6 +93,9 @@ const Community: NextPage = () => {
   console.log(data);
   return (
     <Layout hasTabBar title="동네 사람들">
+      <Head>
+        <title>동네 사람들</title>
+      </Head>
     <Container>
       <SubContainer>
         

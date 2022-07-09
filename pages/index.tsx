@@ -119,7 +119,7 @@ const Home: NextPage = () => {
   }
   return (
    <Layout title="홈" hasTabBar>
-    <Head><title>Home</title></Head> 
+    <Head><title>홈</title></Head> 
       <Container>
       {data?.products?.map((product) => (
         <ItemListBox key={product.id}>          

@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useState } from "react";
@@ -244,6 +245,10 @@ useEffect(() => {
   }, [tokenRouter, router])
 
   return (
+    <>
+    <Head>
+      <title>Login</title>
+    </Head>
     <Container>     
       <ContainerSub>
         <TitleBox>
@@ -302,5 +307,7 @@ useEffect(() => {
         </FormBox>        
       </ContainerSub>    
     </Container>
+    </>
   );
+  
 }
