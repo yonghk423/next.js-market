@@ -9,17 +9,24 @@ const Container = styled.div`
   padding: 50px;
   /* border: 1px solid black; */
   margin: 100px;
+  @media (max-width: 970px) {
+  }  
 `;
 
 const ContainerSub = styled(motion.div)` 
   box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.5); 
-  /* border: 1px solid black; */
   display: grid;
   grid-template-columns: auto;
   grid-row-gap: 20px;
   border-radius: 10px;
+  @media (max-width: 970px) {
+    box-shadow: none;
+    position: relative;
+    left: -120px;
+  }
 `;
 
+//--------------------------------------------------------------------------------------------------------
 const TitleBox = styled.div`
   padding: 10px;
   margin: 20px;
@@ -30,6 +37,12 @@ const TitleBox = styled.div`
   background-color: rgba(225, 225, 225, 0.2);
   border-radius: 15px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  @media (max-width: 970px) {
+  position: relative;
+  background-color: white;
+  border-radius: 0;
+  box-shadow: none;
+  }
 `;
 
 const MainTitle = styled(motion.div)`
@@ -40,10 +53,15 @@ const MainTitle = styled(motion.div)`
   display: grid;
   line-height: 100px;
   grid-template-columns: auto auto auto auto;
-  /* grid-template-columns: repeat(2, 1fr); */
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  @media (max-width: 970px) {
+  left: 10px;
+  width: 390px;
+  height: 80px;
+  line-height: 80px;
+  }
 `;
 const boxVariants = {
   start: {
@@ -79,6 +97,9 @@ const Circle = styled(motion.div)`
   font-weight: bold;
   text-align: center;
   place-self: center;
+  @media (max-width: 970px) {
+  font-size: 20px;  
+  }
 `;
 
 const Svg = styled(motion.svg)`
@@ -90,23 +111,31 @@ const Svg = styled(motion.svg)`
   background-color: hsla(0, 0%, 88.23529411764706%, 0.2);
   border-radius: 15px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+
+  @media (max-width: 970px) {
+  width: 70px;
+  height: 80px;
+  left: 10px;
+  }
 `;
 const myVars = {
   start: { scale: 0 },
   end: { scale : 1, rotateZ: 360, transition: { type: "spring", delay: 0.5, damping:10 } }
-}
+  }
 
 //-------------------------------------------------------------------------------------------------
+const FormBox = styled.form`
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+`;
+
 const EmailInput = styled.input`
 position: relative;
 top: -10px;
 width: 200px;
 height: 30px;
 font-size: 15px;
-/* color: #ffffff; */
-/* background-color: #7eca8b; */
-/* border: 0;
-outline: 0; */
 border: 2px solid #496f4d;
 border-radius: 5px;
 outline-color: #2e732d;
@@ -117,7 +146,6 @@ position: relative;
 width: 200px;
 height: 30px;
 font-size: 15px;
-/* color: #ffffff; */
 border-radius: 5px;
 background-color: #496f4d;
 border: 0;
@@ -132,10 +160,6 @@ top: -10px;
 width: 200px;
 height: 30px;
 font-size: 15px;
-/* color: #ffffff; */
-/* background-color: #7eca8b; */
-/* border: 0;
-outline: 0; */
 border-radius: 5px;
 border: 2px solid #496f4d;
 outline-color: #496f4d;
@@ -146,20 +170,12 @@ position: relative;
 width: 200px;
 height: 30px;
 font-size: 15px;
-/* color: #ffffff; */
 border-radius: 5px;
 background-color:#496f4d;
 border: 0;
 outline: 0;
 outline-color: #496f4d;
 cursor: pointer;
-`;
-
-const FormBox = styled.form`
-  /* border: 1px solid black; */
-  display: grid;
-  grid-template-columns: auto;
-  justify-content: center;
 `;
 
 const TextBox = styled.div`
