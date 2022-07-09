@@ -11,40 +11,47 @@ import Image from 'next/image';
 const Container = styled.div`
 border: 1px solid black;
 padding: 50px;
-
+font-weight: bold;
 `;
 
 const MainTitle = styled.div`
-border: 1px solid black;
+border: 2px solid #496f4d;
 border-bottom: none;
 text-align: center;
+font-weight: bold;
+font-size: 20px;
+padding: 10px;
+
 `;
 
 const UserInfoBox = styled.div`
-border: 1px solid black;
+border: 2px solid #496f4d;
 border-bottom: none;
 `; 
 
 const ProfileImg = styled(Image)`
 /* border: 1px solid black; */
 border-radius: 50px;
+margin: 5px;
 `;
 
 const UserInfo = styled.div`
-border: 1px solid black;
+border: 2px solid #496f4d;
 border-left: none;
 border-right: none;
+
 `;
 
 const QuestionsBox = styled.div`
-border: 1px solid black;
+border: 2px solid #496f4d;
 border-top: none;
 `;
 
 const QAstateBox = styled.div`
-border: 1px solid black;
+border: 2px solid #496f4d;
 border-bottom: none;
 border-top: none;
+
 `;
 
 const Qbox = styled.div`
@@ -52,7 +59,7 @@ const Qbox = styled.div`
 `;
 
 const AnswerBox = styled.div`
-border: 1px solid black;
+border: 2px solid #496f4d;
 border-bottom: none;
 `;
 
@@ -62,14 +69,14 @@ height: 25px;
 `;
 
 const ReplyBox = styled.form`
-  border: 1px solid black;
+  border: 2px solid #496f4d;
   border-top: none;
   display: grid;
   grid-template-columns: auto;
   grid-row-gap: 20px;
 `
 const Textarea = styled.textarea`
-  border: 5px solid rgb(121, 186, 136);
+  border: 2px solid #496f4d;
   border-radius: 10px;
   margin-bottom: 20px;
   /* width: 450px; */
@@ -78,17 +85,30 @@ const Textarea = styled.textarea`
   resize: none;
   position: relative;
   top: 20px;
-  outline-color: #2e732d;
+  outline-color:  #496f4d;
+  margin: 5px;
 `;
 
 const Button = styled.button`
 position: relative;
+width: 80px;
+height: 25px;
+top: -5px;
+color: #ffffff;
+background-color:  #496f4d;
+border: 0;
+outline: 0;
+`;
+
+const ReplyButton = styled.button`
+position: relative;
 width: 100px;
 height: 25px;
 color: #ffffff;
-background-color: #7eca8b;
+background-color:  #496f4d;
 border: 0;
 outline: 0;
+margin: 5px;
 `;
 
 interface AnswerWithUSer extends Answer{
@@ -239,9 +259,9 @@ const CommunityPostDetail: NextPage = () => {
           rows={4}
           placeholder="Answer this question!"
         />
-        <Button>
+        <ReplyButton>
           Reply
-        </Button>
+        </ReplyButton>
       </ReplyBox>
     </Container>
   );
