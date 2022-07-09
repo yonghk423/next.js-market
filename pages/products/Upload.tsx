@@ -51,7 +51,6 @@ const InputDataBox = styled.div`
   grid-template-columns: auto;
   justify-content: center;
   justify-items: center;  
-  /* grid-row-gap: 10px; */
 `;
 
 const Button = styled.button`
