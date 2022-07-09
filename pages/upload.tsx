@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect,  useState } from 'react';
 import { useForm } from "react-hook-form";
 import styled from "styled-components"
-import useMutation from '../../libs/client/useMutation';
+import useMutation from '../libs/client/useMutation';
 import Head from 'next/head'
 
 const Container = styled.div`
