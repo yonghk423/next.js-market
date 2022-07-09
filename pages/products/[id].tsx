@@ -7,14 +7,22 @@ import { Product, User } from '@prisma/client';
 import Image from 'next/image';
 
 const Container = styled.div`
-padding: 50px;
-display: grid;
-grid-template-columns: auto;
-justify-content: center;
-`;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  font-weight: bold;
+  `;
+
+const SubContainer = styled.div`
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+`; 
 
 const MainBox = styled.div`
 /* border: 1px solid black; */
+margin: 5px;
 display: grid;
 `;
 
@@ -23,11 +31,14 @@ const MainImg = styled(Image)`
   /* background-color: #75a475; 
   width: 380px;
   height: 380px; */
+  border-radius: 10px;
+
 `;
 
 const MainInfoBox = styled.div`
-border: 1px solid black;
+/* border: 1px solid black; */
 border-bottom: none;
+margin: 5px;
 `;
 
 const ProfileImg = styled(Image)`
@@ -36,26 +47,41 @@ border-radius: 50px;
 `;
 
 const MainInfoDetailBox = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-bottom: none;
+  margin: 5px;
 `;
 
 const AddInfoBox = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  margin: 5px;
 `;
 
 const AddInfoDetailBox = styled.div`
   border: 1px solid black;
+  margin: 5px;
 `;
 
 const AddInfoDetailImg = styled.div`
   padding: 50px;
   border: 1px solid black;
+  margin: 5px;
+`;
+
+const Button = styled.button`
+  border: 0;
+  outline: 0; 
+  margin: 5px;
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
 const Svg = styled.svg`
 width: 25px;
 height: 25px;
+border: 0;
+outline: 0;
 `;
 
 //---!!!
@@ -91,6 +117,7 @@ const ItemDetail: NextPage = () => {
   console.log(data?.product?.user?.avatar);
   return (
     <Container>
+      <SubContainer>
       <MainBox>         
         <MainImg 
           width={380}
@@ -115,11 +142,11 @@ const ItemDetail: NextPage = () => {
       </MainBox>  
       <MainInfoDetailBox>       
         <h1>{data?.product?.name}</h1>
-        <p>{data?.product?.price}</p>
+        <p>{data?.product?.price}원</p>
         <p>{data?.product?.description}</p>
         <div>
           {/* <button>Talk to seller</button> */}
-          <button 
+          <Button 
             onClick={onFavClick} 
             style={ data?.isLiked ? { color:'red'} : {color : 'white'} }
             >
@@ -137,7 +164,7 @@ const ItemDetail: NextPage = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </Svg>
-          </button>
+          </Button>
         </div>
         </MainInfoDetailBox>      
         <AddInfoBox>
@@ -152,6 +179,7 @@ const ItemDetail: NextPage = () => {
           ))}
         </div>
         </AddInfoBox>
+        </SubContainer>
     </Container>
   );
 };
