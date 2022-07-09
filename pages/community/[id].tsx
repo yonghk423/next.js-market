@@ -9,9 +9,12 @@ import useSWR from 'swr';
 import Image from 'next/image';
 
 const Container = styled.div`
-border: 1px solid black;
-padding: 50px;
-font-weight: bold;
+  padding: 50px;
+  margin: 10px;
+  font-weight: bold;
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
 const MainTitle = styled.div`
@@ -74,7 +77,7 @@ const ReplyBox = styled.form`
   display: grid;
   grid-template-columns: auto;
   grid-row-gap: 20px;
-`
+`;
 const Textarea = styled.textarea`
   border: 2px solid #496f4d;
   border-radius: 10px;
@@ -90,14 +93,16 @@ const Textarea = styled.textarea`
 `;
 
 const Button = styled.button`
-position: relative;
-width: 80px;
-height: 25px;
-top: -5px;
-color: #ffffff;
-background-color:  #496f4d;
-border: 0;
-outline: 0;
+  position: relative;
+  width: 80px;
+  height: 25px;
+  top: -5px;
+  color: #ffffff;
+  background-color:  #496f4d;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+
 `;
 
 const ReplyButton = styled.button`
@@ -109,6 +114,7 @@ background-color:  #496f4d;
 border: 0;
 outline: 0;
 margin: 5px;
+cursor: pointer
 `;
 
 interface AnswerWithUSer extends Answer{
