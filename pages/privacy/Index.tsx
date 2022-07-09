@@ -8,14 +8,21 @@ import Link from 'next/link';
 import { useRouter } from "next/router";
 import useUser from '../../libs/client/useUser';
 import { User } from '@prisma/client';
+import { motion } from "framer-motion"
 
 const Container = styled.div`
-  padding: 10px;
+  padding: 50px;
+  margin: 60px;
+  font-weight: bold;
+  background-color: rgba(225, 225, 225, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
 const ImgUsernameBox = styled.div`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 2px solid #496f4d; */
+  border-bottom: none;
   display: grid;
   justify-content: center;
   justify-items: center;
@@ -23,41 +30,46 @@ const ImgUsernameBox = styled.div`
 
 const Img = styled.img`
   border-radius: 20px;
-  width: 400px;
-  height: 400px;  
+  width: 300px;
+  height: 300px;  
 `;
 
 const ProfileBox = styled.a`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 2px solid #496f4d; */
+  border-bottom: none;
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;
   justify-items: center;
   grid-column-gap: 20px;
+  cursor: pointer;
 `;
 
 const SoldBox = styled.div`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 2px solid #496f4d; */
+  border-bottom: none;
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;
   justify-items: center;
   grid-column-gap: 20px;
+  cursor: pointer;
 `;
 
 const FavBox = styled.div`
   padding: 10px;
-  border: 1px solid black;
+  /* border: 2px solid #496f4d; */
   display: grid;
   grid-template-columns: auto auto;
   justify-content: center;
   justify-items: center;
   grid-column-gap: 20px;
+  cursor: pointer;
 `;
 
-const Svg = styled.svg`
+const Svg = styled(motion.svg)`
 width: 25px;
 height: 25px;
 `;
@@ -108,7 +120,10 @@ const Profile: NextPage = () => {
         <div>
           <Link href="/privacy/Edit">            
             <ProfileBox>              
-              <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <Svg 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                 <path d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
               </Svg>
@@ -120,6 +135,8 @@ const Profile: NextPage = () => {
       <div>
           <SoldBox onClick={() => onSoldClick(user?.profile?.id!)}>
             <Svg
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               className="w-6 h-6"
               fill="none"
               stroke="currentColor"
@@ -138,6 +155,8 @@ const Profile: NextPage = () => {
         <FavBox onClick={() => onLovedClick(user?.profile?.id!)}>
           <div>
             <Svg
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               className="w-6 h-6"
               fill="none"
               stroke="currentColor"
