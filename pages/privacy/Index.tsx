@@ -129,7 +129,7 @@ const Profile: NextPage = () => {
         <div>{user?.profile?.name}</div>
       </ImgUsernameBox>
         <div>
-          <Link href="/privacy/edit">            
+          <Link href="/privacy/Edit">            
             <ProfileBox>              
               <Svg 
               whileHover={{ scale: 1.1 }}
