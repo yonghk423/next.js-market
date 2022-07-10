@@ -61,6 +61,7 @@ color: #ffffff;
 background-color: #496f4d;
 border: 0;
 outline: 0;
+cursor: pointer;
 `;
 
 const Svg = styled.svg`
