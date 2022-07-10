@@ -172,7 +172,7 @@ const ItemDetail: NextPage = () => {
         </div>
         </MainInfoDetailBox>      
         <AddInfoBox>
-        <h2>Similar items</h2>
+        {/* <h2>Similar items</h2>
         <div>
           {data?.relatedProducts?.map((product) => (
             <AddInfoDetailBox key={product.id}>
@@ -181,7 +181,7 @@ const ItemDetail: NextPage = () => {
               <p>{product.price}</p>
             </AddInfoDetailBox>
           ))}
-        </div>
+        </div> */}
         </AddInfoBox>
         </SubContainer>
     </Container>
