@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import client from '../../libs/server/client';
 import Handler, { ResponseType } from "../../libs/server/Handler"
 import { withApiSession } from '../../libs/server/WithSession';
+const { CLOUDFLARE_TOKEN } = process.env;
+console.log(CLOUDFLARE_TOKEN);
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
@@ -14,7 +16,7 @@ async function handler(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer `,
+          Authorization: `Bearer ${process.env.CLOUDFLARE_TOKEN}`,
         },
       }
     )

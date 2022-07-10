@@ -7,7 +7,8 @@ import useUser from '../../libs/client/useUser';
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import Head from "next/head"
-
+const { CLOUDFLARE_TOKEN } = process.env;
+console.log(CLOUDFLARE_TOKEN);
 // 수정 해야 할 것들 
 //disable 유효성 검사 해야 함
 //post 요청 에러 Cannot set headers after they are sent to the client 데이터 바뀌고 있음 

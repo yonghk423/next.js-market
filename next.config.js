@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ["imagedelivery.net"],
   },
+  env : {
+    CLOUDFLARE_TOKEN : "-tHiOYxTSwnDqfeGL79ylStCXc59VuNPn1b9CYeq"
+  }
 }
 
 module.exports = nextConfig
